@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29326.143
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cegeka.Guild.Pokeverse.DAL", "Cegeka.Guild.Pokeverse.DAL\Cegeka.Guild.Pokeverse.DAL.csproj", "{38348B4F-EEFA-47BB-A484-C709AE5CD037}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cegeka.Guild.Pokeverse.BLL", "Cegeka.Guild.Pokeverse.BLL\Cegeka.Guild.Pokeverse.BLL.csproj", "{0765F279-4E84-46A9-946D-D39FD507A433}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cegeka.Guild.Pokeverse.Api", "Cegeka.Guild.Pokeverse.Api\Cegeka.Guild.Pokeverse.Api.csproj", "{C99C0CE6-1D38-44F9-8C73-D9CB3E0F05CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{38348B4F-EEFA-47BB-A484-C709AE5CD037}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38348B4F-EEFA-47BB-A484-C709AE5CD037}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38348B4F-EEFA-47BB-A484-C709AE5CD037}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38348B4F-EEFA-47BB-A484-C709AE5CD037}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0765F279-4E84-46A9-946D-D39FD507A433}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0765F279-4E84-46A9-946D-D39FD507A433}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0765F279-4E84-46A9-946D-D39FD507A433}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0765F279-4E84-46A9-946D-D39FD507A433}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C99C0CE6-1D38-44F9-8C73-D9CB3E0F05CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C99C0CE6-1D38-44F9-8C73-D9CB3E0F05CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C99C0CE6-1D38-44F9-8C73-D9CB3E0F05CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C99C0CE6-1D38-44F9-8C73-D9CB3E0F05CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC544335-5FBF-4123-9225-066AA7019530}
+	EndGlobalSection
+EndGlobal
