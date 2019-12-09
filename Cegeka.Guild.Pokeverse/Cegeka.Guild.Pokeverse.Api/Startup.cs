@@ -1,6 +1,5 @@
 using Cegeka.Guild.Pokeverse.Business;
 using Cegeka.Guild.Pokeverse.Infrastructure;
-using Cegeka.Guild.Pokeverse.Persistence.InMemory;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

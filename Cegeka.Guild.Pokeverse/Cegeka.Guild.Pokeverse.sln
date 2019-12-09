@@ -15,9 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cegeka.Guild.Pokeverse.Busi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cegeka.Guild.Pokeverse.Domain", "Cegeka.Guild.Pokeverse.Domain\Cegeka.Guild.Pokeverse.Domain.csproj", "{CC19D404-179C-4929-A7FA-74C4FFC3F64E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cegeka.Guild.Pokeverse.Persistence.InMemory", "Cegeka.Guild.Pokeverse.Persistence.InMemory\Cegeka.Guild.Pokeverse.Persistence.InMemory.csproj", "{B2D44C8E-EC61-484A-A6D6-3476549F7D41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cegeka.Guild.Pokeverse.Persistence.InMemory", "Cegeka.Guild.Pokeverse.Persistence.InMemory\Cegeka.Guild.Pokeverse.Persistence.InMemory.csproj", "{B2D44C8E-EC61-484A-A6D6-3476549F7D41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cegeka.Guild.Pokeverse.Infrastructure", "Cegeka.Guild.Pokeverse.Infrastructure\Cegeka.Guild.Pokeverse.Infrastructure.csproj", "{A622CF9C-9EAD-486A-93FB-782161E6E674}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cegeka.Guild.Pokeverse.Infrastructure", "Cegeka.Guild.Pokeverse.Infrastructure\Cegeka.Guild.Pokeverse.Infrastructure.csproj", "{A622CF9C-9EAD-486A-93FB-782161E6E674}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cegeka.Guild.Pokeverse.Persistence.EntityFramework", "Cegeka.Guild.Pokeverse.Persistence.EntityFramework\Cegeka.Guild.Pokeverse.Persistence.EntityFramework.csproj", "{F91BD748-2623-4750-80DC-99490E20A9A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{A622CF9C-9EAD-486A-93FB-782161E6E674}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A622CF9C-9EAD-486A-93FB-782161E6E674}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A622CF9C-9EAD-486A-93FB-782161E6E674}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F91BD748-2623-4750-80DC-99490E20A9A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F91BD748-2623-4750-80DC-99490E20A9A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F91BD748-2623-4750-80DC-99490E20A9A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F91BD748-2623-4750-80DC-99490E20A9A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{CC19D404-179C-4929-A7FA-74C4FFC3F64E} = {A3491B55-12B5-4757-ACBE-3E98322DDF7C}
 		{B2D44C8E-EC61-484A-A6D6-3476549F7D41} = {89692A89-F9DA-4565-B05D-059BFFB3B3B4}
 		{A622CF9C-9EAD-486A-93FB-782161E6E674} = {89692A89-F9DA-4565-B05D-059BFFB3B3B4}
+		{F91BD748-2623-4750-80DC-99490E20A9A7} = {89692A89-F9DA-4565-B05D-059BFFB3B3B4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EC544335-5FBF-4123-9225-066AA7019530}

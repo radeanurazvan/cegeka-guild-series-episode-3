@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Cegeka.Guild.Pokeverse.BLL.Models;
+using Cegeka.Guild.Pokeverse.Business.Models;
 
-namespace Cegeka.Guild.Pokeverse.BLL.Abstracts
+namespace Cegeka.Guild.Pokeverse.Business.Abstracts
 {
     public interface IArenaService
     {

@@ -1,8 +1,8 @@
-﻿using Cegeka.Guild.Pokeverse.BLL.Abstracts;
-using Cegeka.Guild.Pokeverse.BLL.Implementations;
+﻿using Cegeka.Guild.Pokeverse.Business.Abstracts;
+using Cegeka.Guild.Pokeverse.Business.Implementations;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Cegeka.Guild.Pokeverse.BLL
+namespace Cegeka.Guild.Pokeverse.Business
 {
     public static class ServiceCollectionExtensions
     {

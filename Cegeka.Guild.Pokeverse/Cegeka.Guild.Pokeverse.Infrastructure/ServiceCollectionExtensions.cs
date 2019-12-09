@@ -1,5 +1,5 @@
-﻿using System;
-using Cegeka.Guild.Pokeverse.DAL;
+﻿using Cegeka.Guild.Pokeverse.Persistence.EntityFramework;
+using Cegeka.Guild.Pokeverse.Persistence.InMemory;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Cegeka.Guild.Pokeverse.Infrastructure
@@ -8,7 +8,7 @@ namespace Cegeka.Guild.Pokeverse.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-            return services.AddInMemoryPersistence();
+            return services.AddEntityFrameworkPersistence();
         }
     }
 }

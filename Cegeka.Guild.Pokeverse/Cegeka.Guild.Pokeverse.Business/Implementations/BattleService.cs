@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cegeka.Guild.Pokeverse.BLL.Abstracts;
-using Cegeka.Guild.Pokeverse.DAL.Abstracts;
-using Cegeka.Guild.Pokeverse.DAL.Entities;
+using Cegeka.Guild.Pokeverse.Business.Abstracts;
+using Cegeka.Guild.Pokeverse.Domain.Abstracts;
+using Cegeka.Guild.Pokeverse.Domain.Entities;
 
-namespace Cegeka.Guild.Pokeverse.BLL.Implementations
+namespace Cegeka.Guild.Pokeverse.Business.Implementations
 {
     internal class BattleService : IBattleService
     {
@@ -96,6 +96,8 @@ namespace Cegeka.Guild.Pokeverse.BLL.Implementations
                 battle.Loser = pokemonTakingDamage.Pokemon;
                 battle.FinishedAt = DateTime.Now;
             }
+
+            battlesRepository.Save();
         }
     }
 }

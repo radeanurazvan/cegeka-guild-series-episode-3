@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Cegeka.Guild.Pokeverse.BLL.Abstracts
+namespace Cegeka.Guild.Pokeverse.Business.Abstracts
 {
     public interface IBattleService
     {

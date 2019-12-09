@@ -1,9 +1,9 @@
-﻿using Cegeka.Guild.Pokeverse.DAL.Abstracts;
-using Cegeka.Guild.Pokeverse.DAL.Entities;
-using Cegeka.Guild.Pokeverse.DAL.Implementations;
+﻿using Cegeka.Guild.Pokeverse.Domain.Abstracts;
+using Cegeka.Guild.Pokeverse.Domain.Entities;
+using Cegeka.Guild.Pokeverse.Persistence.InMemory.Implementations;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Cegeka.Guild.Pokeverse.DAL
+namespace Cegeka.Guild.Pokeverse.Persistence.InMemory
 {
     public static class ServiceCollectionExtensions
     {

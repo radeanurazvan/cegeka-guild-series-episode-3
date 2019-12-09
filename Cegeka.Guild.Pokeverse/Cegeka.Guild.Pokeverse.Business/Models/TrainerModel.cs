@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Cegeka.Guild.Pokeverse.BLL.Models
+namespace Cegeka.Guild.Pokeverse.Business.Models
 {
     public class TrainerModel
     {
