@@ -1,5 +1,6 @@
-using Cegeka.Guild.Pokeverse.BLL;
-using Cegeka.Guild.Pokeverse.DAL;
+using Cegeka.Guild.Pokeverse.Business;
+using Cegeka.Guild.Pokeverse.Infrastructure;
+using Cegeka.Guild.Pokeverse.Persistence.InMemory;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,8 +23,8 @@ namespace Cegeka.Guild.Pokeverse.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddPersistence()
-                .AddServices()
+                .AddInfrastructure()
+                .AddCore()
                 .AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo {Title = "My API", Version = "v1"}))
                 .AddControllers();
         }

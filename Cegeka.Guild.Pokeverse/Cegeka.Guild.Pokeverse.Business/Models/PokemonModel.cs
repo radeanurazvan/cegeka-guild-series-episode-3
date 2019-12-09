@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Cegeka.Guild.Pokeverse.BLL.Models
 {
@@ -7,5 +8,7 @@ namespace Cegeka.Guild.Pokeverse.BLL.Models
         public Guid Id { get; set; }
 
         public string Name { get; set; }
+
+        public IEnumerable<AbilityModel> Abilities { get; set; }
     }
 }

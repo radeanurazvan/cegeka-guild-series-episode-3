@@ -9,8 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Cegeka.Guild.Pokeverse.BLL\Cegeka.Guild.Pokeverse.BLL.csproj" />
-    <ProjectReference Include="..\Cegeka.Guild.Pokeverse.DAL\Cegeka.Guild.Pokeverse.DAL.csproj" />
+    <ProjectReference Include="..\Cegeka.Guild.Pokeverse.Business\Cegeka.Guild.Pokeverse.Business.csproj" />
+    <ProjectReference Include="..\Cegeka.Guild.Pokeverse.Domain\Cegeka.Guild.Pokeverse.Domain.csproj" />
+    <ProjectReference Include="..\Cegeka.Guild.Pokeverse.Infrastructure\Cegeka.Guild.Pokeverse.Infrastructure.csproj" />
+    <ProjectReference Include="..\Cegeka.Guild.Pokeverse.Persistence.InMemory\Cegeka.Guild.Pokeverse.Persistence.InMemory.csproj" />
   </ItemGroup>
 
 </Project>

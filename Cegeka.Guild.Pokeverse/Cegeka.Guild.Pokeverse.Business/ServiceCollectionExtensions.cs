@@ -6,7 +6,7 @@ namespace Cegeka.Guild.Pokeverse.BLL
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddServices(this IServiceCollection services)
+        public static IServiceCollection AddCore(this IServiceCollection services)
         {
             return services.AddScoped<ITrainerService, TrainerService>()
                 .AddScoped<IBattleService, BattleService>()

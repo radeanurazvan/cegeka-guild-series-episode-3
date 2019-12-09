@@ -1,6 +1,6 @@
 ﻿using System;
 using Cegeka.Guild.Pokeverse.Api.Models;
-using Cegeka.Guild.Pokeverse.BLL.Abstracts;
+using Cegeka.Guild.Pokeverse.Business.Abstracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cegeka.Guild.Pokeverse.Api.Controllers

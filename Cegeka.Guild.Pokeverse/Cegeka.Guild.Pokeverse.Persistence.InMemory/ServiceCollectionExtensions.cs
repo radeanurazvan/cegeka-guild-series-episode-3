@@ -7,7 +7,7 @@ namespace Cegeka.Guild.Pokeverse.DAL
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddPersistence(this IServiceCollection services)
+        public static IServiceCollection AddInMemoryPersistence(this IServiceCollection services)
         {
             return services.AddSingleton(typeof(IRepository<>), typeof(GenericRepository<>))
                 .AddSingleton<IRepository<PokemonDefinition>, PokemonDefinitionsRepository>();

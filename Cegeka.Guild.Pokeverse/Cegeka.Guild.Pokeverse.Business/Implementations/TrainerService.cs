@@ -32,7 +32,11 @@ namespace Cegeka.Guild.Pokeverse.BLL.Implementations
                 Pokemons = t.Pokemons.Select(p => new PokemonModel
                 {
                     Id = p.Id,
-                    Name = p.Name
+                    Name = p.Name,
+                    Abilities = p.Abilities.Select(x => new AbilityModel
+                    {
+                        Id = x.Id, Name = x.Name
+                    }).ToList()
                 }).ToList()
             });
         }

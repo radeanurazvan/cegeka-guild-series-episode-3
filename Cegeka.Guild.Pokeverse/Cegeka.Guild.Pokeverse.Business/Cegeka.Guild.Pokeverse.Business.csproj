@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Cegeka.Guild.Pokeverse.DAL\Cegeka.Guild.Pokeverse.DAL.csproj" />
+    <ProjectReference Include="..\Cegeka.Guild.Pokeverse.Domain\Cegeka.Guild.Pokeverse.Domain.csproj" />
   </ItemGroup>
 
 </Project>
