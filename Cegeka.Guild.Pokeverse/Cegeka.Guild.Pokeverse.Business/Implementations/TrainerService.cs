@@ -14,9 +14,9 @@ namespace Cegeka.Guild.Pokeverse.Business.Implementations
 
         private readonly IRepository<PokemonDefinition> definitionsRepository;
         private readonly IRepository<Pokemon> pokemonsRepository;
-        private readonly IRepository<Trainer> trainerRepository;
+        private readonly IRepository<Domain.Entities.Trainer> trainerRepository;
 
-        public TrainerService(IRepository<PokemonDefinition> definitionsRepository, IRepository<Pokemon> pokemonsRepository, IRepository<Trainer> trainerRepository)
+        public TrainerService(IRepository<PokemonDefinition> definitionsRepository, IRepository<Pokemon> pokemonsRepository, IRepository<Domain.Entities.Trainer> trainerRepository)
         {
             this.definitionsRepository = definitionsRepository;
             this.pokemonsRepository = pokemonsRepository;
@@ -44,7 +44,7 @@ namespace Cegeka.Guild.Pokeverse.Business.Implementations
         public void Register(string name)
         {
             var random = new Random(DateTime.Now.Millisecond);
-            var trainer = new Trainer { Name = name };
+            var trainer = new Domain.Entities.Trainer { Name = name };
 
             var pokemons = this.definitionsRepository.GetAll();
             Enumerable.Range(1, RandomPokemonsOnRegister)

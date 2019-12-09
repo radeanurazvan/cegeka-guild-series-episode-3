@@ -92,6 +92,8 @@ namespace Cegeka.Guild.Pokeverse.Persistence.InMemory.Implementations
         public PokemonDefinition GetById(Guid id) => definitions.FirstOrDefault(p => p.Id == id);
 
         public void Add(PokemonDefinition entity) => definitions.Add(entity);
-
+        public void Save()
+        {
+        }
     }
 }
