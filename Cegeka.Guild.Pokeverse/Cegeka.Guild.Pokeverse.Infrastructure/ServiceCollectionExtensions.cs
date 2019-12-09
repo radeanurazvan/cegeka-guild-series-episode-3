@@ -11,7 +11,6 @@ namespace Cegeka.Guild.Pokeverse.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
             return services
-                .AddMediatR(BusinessAssembly.Value)
                 .AddEntityFrameworkPersistence();
         }
     }
