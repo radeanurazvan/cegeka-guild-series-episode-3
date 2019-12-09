@@ -1,5 +1,9 @@
-﻿using Cegeka.Guild.Pokeverse.Api.Models;
+﻿using System.Threading.Tasks;
+using Cegeka.Guild.Pokeverse.Api.Models;
 using Cegeka.Guild.Pokeverse.Business.Abstracts;
+using Cegeka.Guild.Pokeverse.Business.Trainer.Commands;
+using Cegeka.Guild.Pokeverse.Business.Trainer.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cegeka.Guild.Pokeverse.Api.Controllers
@@ -7,23 +11,23 @@ namespace Cegeka.Guild.Pokeverse.Api.Controllers
     [Route("api/trainers")]
     public class TrainersController : ControllerBase
     {
-        private readonly ITrainerService trainersService;
+        private readonly IMediator mediator;
 
-        public TrainersController(ITrainerService trainersService)
+        public TrainersController(IMediator mediator)
         {
-            this.trainersService = trainersService;
+            this.mediator = mediator;
         }
 
         [HttpGet("")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return Ok(this.trainersService.GetAll());
+            return Ok(await this.mediator.Send(new GetAllTrainersQuery()));
         }
 
         [HttpPost("")]
-        public IActionResult Register([FromBody]RegisterTrainerModel model)
+        public async Task<IActionResult> Register([FromBody]RegisterTrainerModel model)
         {
-            this.trainersService.Register(model.Name);
+            await this.mediator.Send(new RegisterTrainerCommand(model.Name));
             return Ok();
         }
     }

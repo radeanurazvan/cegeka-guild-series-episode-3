@@ -9,7 +9,7 @@ namespace Cegeka.Guild.Pokeverse.Business
     {
         public static IServiceCollection AddCore(this IServiceCollection services)
         {
-            return services.AddScoped<ITrainerService, TrainerService>()
+            return services
                 .AddScoped<IBattleService, BattleService>()
                 .AddScoped<IArenaService, ArenaService>()
                 .AddMediatR(BusinessAssembly.Value);
