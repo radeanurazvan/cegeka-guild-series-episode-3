@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Cegeka.Guild.Pokeverse.Api.Models;
-using Cegeka.Guild.Pokeverse.Business.Abstracts;
 using Cegeka.Guild.Pokeverse.Business.Trainer.Commands;
 using Cegeka.Guild.Pokeverse.Business.Trainer.Queries;
 using MediatR;

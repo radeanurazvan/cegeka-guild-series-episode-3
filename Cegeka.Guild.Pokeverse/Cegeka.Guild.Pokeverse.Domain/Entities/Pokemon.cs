@@ -5,15 +5,19 @@ namespace Cegeka.Guild.Pokeverse.Domain.Entities
 {
     public class Pokemon : Entity
     {
-        public Pokemon(Trainer trainer, PokemonDefinition definition)
+        private Pokemon()
         {
-            Definition = definition;
-
             HealthPoints = 1;
             CriticalStrikeChancePoints = 0;
             DamagePoints = 2;
             CurrentLevel = 1;
             Experience = 0;
+        }
+
+        public Pokemon(Trainer trainer, PokemonDefinition definition)
+            : this()
+        {
+            Definition = definition;
 
             TrainerId = trainer.Id;
         }

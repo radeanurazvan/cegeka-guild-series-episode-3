@@ -22,7 +22,7 @@ namespace Cegeka.Guild.Pokeverse.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddInfrastructure()
+                .AddInfrastructure(Configuration)
                 .AddCore()
                 .AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo {Title = "My API", Version = "v1"}))
                 .AddControllers();
@@ -45,7 +45,8 @@ namespace Cegeka.Guild.Pokeverse.Api
                 .UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllers();
-                });
+                })
+                .SeedData();
         }
     }
 }

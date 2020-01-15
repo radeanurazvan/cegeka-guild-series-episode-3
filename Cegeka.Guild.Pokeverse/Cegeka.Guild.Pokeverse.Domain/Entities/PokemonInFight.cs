@@ -1,7 +1,11 @@
-﻿namespace Cegeka.Guild.Pokeverse.Domain.Entities
+﻿using System;
+
+namespace Cegeka.Guild.Pokeverse.Domain.Entities
 {
-    public class PokemonInFight
+    public class PokemonInFight : Entity
     {
+        private PokemonInFight() {}
+
         public PokemonInFight(Pokemon pokemon)
         {
             Pokemon = pokemon;
@@ -9,6 +13,12 @@
         }
 
         public Pokemon Pokemon { get; set; }
+
+        public Guid PokemonId { get; set; }
+
+        public Guid AttackBattleId { get; set; }
+
+        public Guid DefendBattleId { get; set; }
 
         public int Health { get; set; }
     }

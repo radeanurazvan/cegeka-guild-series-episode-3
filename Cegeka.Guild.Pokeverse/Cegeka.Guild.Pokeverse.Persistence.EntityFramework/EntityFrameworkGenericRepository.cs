@@ -29,7 +29,6 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
         public void Add(T entity)
         {
             context.Set<T>().Add(entity);
-            context.SaveChanges();
         }
 
         public void Save()

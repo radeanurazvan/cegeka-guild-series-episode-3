@@ -38,9 +38,9 @@ namespace Cegeka.Guild.Pokeverse.Business.Trainer.EventHandlers
                 .ForEach(p =>
                 {
                     this.pokemonsRepository.Add(p);
-                    trainer.Pokemons.Add(p);
                 });
 
+            pokemonsRepository.Save();
             return Task.CompletedTask;
         }
     }

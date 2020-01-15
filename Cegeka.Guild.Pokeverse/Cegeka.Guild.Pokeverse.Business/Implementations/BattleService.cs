@@ -50,6 +50,7 @@ namespace Cegeka.Guild.Pokeverse.Business.Implementations
                 ActivePlayer = attackerId
             };
             this.battlesRepository.Add(battle);
+            this.battlesRepository.Save();
         }
     }
 }
