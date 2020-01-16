@@ -34,17 +34,12 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework.Migrations
                     b.Property<Guid?>("PokemonDefinitionId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("PokemonId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("RequiredLevel")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PokemonDefinitionId");
-
-                    b.HasIndex("PokemonId");
 
                     b.ToTable("Ability");
                 });
@@ -67,16 +62,24 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework.Migrations
                     b.Property<DateTime>("FinishedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("LoserId")
+                    b.Property<Guid?>("LoserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("StartedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("WinnerId")
+                    b.Property<Guid?>("WinnerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LoserId")
+                        .IsUnique()
+                        .HasFilter("[LoserId] IS NOT NULL");
+
+                    b.HasIndex("WinnerId")
+                        .IsUnique()
+                        .HasFilter("[WinnerId] IS NOT NULL");
 
                     b.ToTable("Battles");
                 });
@@ -96,7 +99,7 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework.Migrations
                     b.Property<int>("DamagePoints")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("DefinitionId")
+                    b.Property<Guid>("DefinitionId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Experience")
@@ -137,10 +140,10 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AttackBattleId")
+                    b.Property<Guid?>("AttackBattleId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("DefendBattleId")
+                    b.Property<Guid?>("DefendBattleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Health")
@@ -152,12 +155,15 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AttackBattleId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[AttackBattleId] IS NOT NULL");
 
                     b.HasIndex("DefendBattleId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[DefendBattleId] IS NOT NULL");
 
-                    b.HasIndex("PokemonId");
+                    b.HasIndex("PokemonId")
+                        .IsUnique();
 
                     b.ToTable("PokemonInFight");
                 });
@@ -181,17 +187,28 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework.Migrations
                     b.HasOne("Cegeka.Guild.Pokeverse.Domain.Entities.PokemonDefinition", null)
                         .WithMany("Abilities")
                         .HasForeignKey("PokemonDefinitionId");
+                });
 
-                    b.HasOne("Cegeka.Guild.Pokeverse.Domain.Entities.Pokemon", null)
-                        .WithMany("Abilities")
-                        .HasForeignKey("PokemonId");
+            modelBuilder.Entity("Cegeka.Guild.Pokeverse.Domain.Entities.Battle", b =>
+                {
+                    b.HasOne("Cegeka.Guild.Pokeverse.Domain.Entities.Pokemon", "Loser")
+                        .WithOne()
+                        .HasForeignKey("Cegeka.Guild.Pokeverse.Domain.Entities.Battle", "LoserId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("Cegeka.Guild.Pokeverse.Domain.Entities.Pokemon", "Winner")
+                        .WithOne()
+                        .HasForeignKey("Cegeka.Guild.Pokeverse.Domain.Entities.Battle", "WinnerId")
+                        .OnDelete(DeleteBehavior.NoAction);
                 });
 
             modelBuilder.Entity("Cegeka.Guild.Pokeverse.Domain.Entities.Pokemon", b =>
                 {
                     b.HasOne("Cegeka.Guild.Pokeverse.Domain.Entities.PokemonDefinition", "Definition")
                         .WithMany()
-                        .HasForeignKey("DefinitionId");
+                        .HasForeignKey("DefinitionId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("Cegeka.Guild.Pokeverse.Domain.Entities.Trainer", null)
                         .WithMany("Pokemons")
@@ -205,19 +222,17 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework.Migrations
                     b.HasOne("Cegeka.Guild.Pokeverse.Domain.Entities.Battle", null)
                         .WithOne("Attacker")
                         .HasForeignKey("Cegeka.Guild.Pokeverse.Domain.Entities.PokemonInFight", "AttackBattleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Cegeka.Guild.Pokeverse.Domain.Entities.Battle", null)
                         .WithOne("Defender")
                         .HasForeignKey("Cegeka.Guild.Pokeverse.Domain.Entities.PokemonInFight", "DefendBattleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Cegeka.Guild.Pokeverse.Domain.Entities.Pokemon", "Pokemon")
-                        .WithMany()
-                        .HasForeignKey("PokemonId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithOne()
+                        .HasForeignKey("Cegeka.Guild.Pokeverse.Domain.Entities.PokemonInFight", "PokemonId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

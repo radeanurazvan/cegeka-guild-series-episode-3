@@ -9,13 +9,15 @@ namespace Cegeka.Guild.Pokeverse.Business.Implementations
 {
     internal class BattleService : IBattleService
     {
-        private readonly IRepository<Pokemon> pokemonsRepository;
-        private readonly IRepository<Battle> battlesRepository;
+        private readonly IReadRepository<Pokemon> pokemonsReadRepository;
+        private readonly IReadRepository<Battle> battlesReadRepository;
+        private readonly IWriteRepository<Battle> battlesWriteRepository;
 
-        public BattleService(IRepository<Pokemon> pokemonsRepository, IRepository<Battle> battlesRepository)
+        public BattleService(IReadRepository<Pokemon> pokemonsReadRepository, IReadRepository<Battle> battlesReadRepository, IWriteRepository<Battle> battlesWriteRepository)
         {
-            this.pokemonsRepository = pokemonsRepository;
-            this.battlesRepository = battlesRepository;
+            this.pokemonsReadRepository = pokemonsReadRepository;
+            this.battlesReadRepository = battlesReadRepository;
+            this.battlesWriteRepository = battlesWriteRepository;
         }
 
         public void StartBattle(Guid attackerId, Guid defenderId)
@@ -26,15 +28,15 @@ namespace Cegeka.Guild.Pokeverse.Business.Implementations
             }
 
             var participants = new List<Guid> { attackerId, defenderId };
-            var pokemonsAlreadyInBattle = this.battlesRepository.GetAll()
+            var pokemonsAlreadyInBattle = this.battlesReadRepository.GetAll()
                 .Any(b => participants.Contains(b.AttackerId) || participants.Contains(b.DefenderId));
             if (pokemonsAlreadyInBattle)
             {
                 throw new InvalidOperationException("Pokemons already in battle!");
             }
 
-            var attacker = this.pokemonsRepository.GetById(attackerId);
-            var defender = this.pokemonsRepository.GetById(defenderId);
+            var attacker = this.pokemonsReadRepository.GetById(attackerId);
+            var defender = this.pokemonsReadRepository.GetById(defenderId);
 
             if (attacker.TrainerId == defender.TrainerId)
             {
@@ -49,8 +51,8 @@ namespace Cegeka.Guild.Pokeverse.Business.Implementations
                 Defender = new PokemonInFight(defender),
                 ActivePlayer = attackerId
             };
-            this.battlesRepository.Add(battle);
-            this.battlesRepository.Save();
+            this.battlesWriteRepository.Add(battle);
+            this.battlesWriteRepository.Save();
         }
     }
 }

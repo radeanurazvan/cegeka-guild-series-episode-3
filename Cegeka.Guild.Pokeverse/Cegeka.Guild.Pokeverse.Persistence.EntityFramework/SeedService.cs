@@ -7,7 +7,8 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
 {
     internal sealed class SeedService : ISeedService
     {
-        private readonly IRepository<PokemonDefinition> definitionsRepository;
+        private readonly IReadRepository<PokemonDefinition> definitionsReadRepository;
+        private readonly IWriteRepository<PokemonDefinition> definitionsWriteRepository;
 
         private readonly ICollection<PokemonDefinition> definitions = new List<PokemonDefinition>
         {
@@ -88,21 +89,22 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
             }
         };
 
-        public SeedService(IRepository<PokemonDefinition> definitionsRepository)
+        public SeedService(IReadRepository<PokemonDefinition> definitionsReadRepository, IWriteRepository<PokemonDefinition> definitionsWriteRepository)
         {
-            this.definitionsRepository = definitionsRepository;
+            this.definitionsReadRepository = definitionsReadRepository;
+            this.definitionsWriteRepository = definitionsWriteRepository;
         }
 
         public void Seed()
         {
-            var existingDefinitions = definitionsRepository.GetAll();
+            var existingDefinitions = definitionsReadRepository.GetAll();
             if (existingDefinitions.Any())
             {
                 return;
             }
 
-            definitions.ToList().ForEach(definitionsRepository.Add);
-            definitionsRepository.Save();
+            definitions.ToList().ForEach(definitionsWriteRepository.Add);
+            definitionsWriteRepository.Save();
         }
     }
 }

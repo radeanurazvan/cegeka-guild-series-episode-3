@@ -4,15 +4,11 @@ using Cegeka.Guild.Pokeverse.Domain.Entities;
 
 namespace Cegeka.Guild.Pokeverse.Domain.Abstracts
 {
-    public interface IRepository<T>
+    public interface IReadRepository<out T>
         where T : Entity
     {
         IEnumerable<T> GetAll();
 
         T GetById(Guid id);
-
-        void Add(T entity);
-
-        void Save();
     }
 }

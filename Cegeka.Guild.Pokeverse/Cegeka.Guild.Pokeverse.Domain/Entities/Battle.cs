@@ -25,10 +25,10 @@ namespace Cegeka.Guild.Pokeverse.Domain.Entities
 
         public Pokemon Winner { get; set; }
 
-        public Guid WinnerId { get; set; }
+        public Guid? WinnerId { get; set; }
 
         public Pokemon Loser { get; set; }
 
-        public Guid LoserId { get; set; }
+        public Guid? LoserId { get; set; }
     }
 }

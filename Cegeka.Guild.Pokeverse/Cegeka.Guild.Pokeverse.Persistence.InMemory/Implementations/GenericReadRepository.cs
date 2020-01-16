@@ -6,7 +6,7 @@ using Cegeka.Guild.Pokeverse.Domain.Entities;
 
 namespace Cegeka.Guild.Pokeverse.Persistence.InMemory.Implementations
 {
-    internal class GenericRepository<T> : IRepository<T>
+    internal class GenericReadRepository<T> : IReadRepository<T>
         where T : Entity
     {
         private readonly ICollection<T> entities = new List<T>();

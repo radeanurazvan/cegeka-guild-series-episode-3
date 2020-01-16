@@ -12,16 +12,16 @@ namespace Cegeka.Guild.Pokeverse.Business.Trainer.QueryHandlers
     internal sealed class GetAllTrainersQueryHandler : IRequestHandler<GetAllTrainersQuery, IEnumerable<TrainerModel>>
     {
         
-        private readonly IRepository<Domain.Entities.Trainer> trainerRepository;
+        private readonly IReadRepository<Domain.Entities.Trainer> trainerReadRepository;
 
-        public GetAllTrainersQueryHandler(IRepository<Domain.Entities.Trainer> trainerRepository)
+        public GetAllTrainersQueryHandler(IReadRepository<Domain.Entities.Trainer> trainerReadRepository)
         {
-            this.trainerRepository = trainerRepository;
+            this.trainerReadRepository = trainerReadRepository;
         }
 
         public Task<IEnumerable<TrainerModel>> Handle(GetAllTrainersQuery request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(this.trainerRepository.GetAll().Select(t => new TrainerModel
+            return Task.FromResult(this.trainerReadRepository.GetAll().Select(t => new TrainerModel
             {
                 Id = t.Id,
                 Name = t.Name,

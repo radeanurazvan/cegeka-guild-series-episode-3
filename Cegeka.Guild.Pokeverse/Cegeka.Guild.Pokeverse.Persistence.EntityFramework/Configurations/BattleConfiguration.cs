@@ -10,22 +10,23 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework.Configurations
         {
             builder.HasOne(battle => battle.Attacker)
                 .WithOne()
-                .HasForeignKey<PokemonInFight>(fight => fight.AttackBattleId);
+                .HasForeignKey<PokemonInFight>(fight => fight.AttackBattleId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(battle => battle.Defender)
                 .WithOne()
-                .HasForeignKey<PokemonInFight>(fight => fight.DefendBattleId);
+                .HasForeignKey<PokemonInFight>(fight => fight.DefendBattleId)
+                .OnDelete(DeleteBehavior.NoAction);
 
-            builder.Ignore(x => x.Winner);
-            builder.Ignore(x => x.Loser);
+            builder.HasOne(x => x.Winner)
+                .WithOne()
+                .HasForeignKey<Battle>(x => x.WinnerId)
+                .OnDelete(DeleteBehavior.NoAction);
 
-            //builder.HasOne(x => x.Winner)
-            //    .WithOne()
-            //    .HasForeignKey<Battle>(x => x.WinnerId);
-
-            //builder.HasOne(x => x.Loser)
-            //    .WithOne()
-            //    .HasForeignKey<Battle>(x => x.LoserId);
+            builder.HasOne(x => x.Loser)
+                .WithOne()
+                .HasForeignKey<Battle>(x => x.LoserId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

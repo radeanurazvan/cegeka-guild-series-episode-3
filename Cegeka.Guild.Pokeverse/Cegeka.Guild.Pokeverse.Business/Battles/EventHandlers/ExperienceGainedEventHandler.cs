@@ -10,23 +10,25 @@ namespace Cegeka.Guild.Pokeverse.Business.Battles.EventHandlers
     internal sealed class ExperienceGainedEventHandler : INotificationHandler<ExperienceGainedEvent>
     {
         private const int ExperienceThreshold = 100;
-        private readonly IRepository<Pokemon> pokemonRepository;
+        private readonly IReadRepository<Pokemon> pokemonReadRepository;
+        private readonly IWriteRepository<Pokemon> pokemonWriteRepository;
 
-        public ExperienceGainedEventHandler(IRepository<Pokemon> pokemonRepository)
+        public ExperienceGainedEventHandler(IReadRepository<Pokemon> pokemonReadRepository, IWriteRepository<Pokemon> pokemonWriteRepository)
         {
-            this.pokemonRepository = pokemonRepository;
+            this.pokemonReadRepository = pokemonReadRepository;
+            this.pokemonWriteRepository = pokemonWriteRepository;
         }
 
         public Task Handle(ExperienceGainedEvent notification, CancellationToken cancellationToken)
         {
-            var pokemon = this.pokemonRepository.GetById(notification.PokemonId);
+            var pokemon = this.pokemonReadRepository.GetById(notification.PokemonId);
             if(pokemon.Experience > pokemon.CurrentLevel * ExperienceThreshold)
             {
                 pokemon.CurrentLevel++;
                 pokemon.Experience = 0;
             }
 
-            this.pokemonRepository.Save();
+            this.pokemonWriteRepository.Save();
             return Task.CompletedTask;
         }
     }

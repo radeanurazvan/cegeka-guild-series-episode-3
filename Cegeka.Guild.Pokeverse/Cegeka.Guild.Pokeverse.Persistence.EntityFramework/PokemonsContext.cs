@@ -9,12 +9,12 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
         public PokemonsContext()
             : base(GetOptions())
         {
-            Database.Migrate();   
         }
 
         public PokemonsContext(DbContextOptions options)
             : base(options)
         {
+            Database.Migrate();   
         }
 
         public DbSet<PokemonDefinition> PokemonDefinitions { get; set; }
@@ -32,6 +32,7 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
             base.OnModelCreating(modelBuilder);
             new PokemonInFightConfiguration().Configure(modelBuilder.Entity<PokemonInFight>());
             new BattleConfiguration().Configure(modelBuilder.Entity<Battle>());
+            new PokemonConfiguration().Configure(modelBuilder.Entity<Pokemon>());
         }
     }
 }

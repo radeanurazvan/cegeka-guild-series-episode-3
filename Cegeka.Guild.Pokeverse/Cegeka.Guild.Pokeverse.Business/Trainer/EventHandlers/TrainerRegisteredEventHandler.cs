@@ -13,34 +13,34 @@ namespace Cegeka.Guild.Pokeverse.Business.Trainer.EventHandlers
     {
         private const int RandomPokemonsOnRegister = 2;
 
-        private readonly IRepository<PokemonDefinition> definitionsRepository;
-        private readonly IRepository<Pokemon> pokemonsRepository;
-        private readonly IRepository<Domain.Entities.Trainer> trainersRepository;
+        private readonly IReadRepository<PokemonDefinition> definitionsReadRepository;
+        private readonly IReadRepository<Domain.Entities.Trainer> trainersReadRepository;
+        private readonly IWriteRepository<Pokemon> pokemonWriteRepository;
 
-        public TrainerRegisteredEventHandler(IRepository<PokemonDefinition> definitionsRepository, IRepository<Pokemon> pokemonsRepository, IRepository<Domain.Entities.Trainer> trainersRepository)
+        public TrainerRegisteredEventHandler(
+            IReadRepository<PokemonDefinition> definitionsReadRepository, 
+            IReadRepository<Domain.Entities.Trainer> trainersReadRepository,
+            IWriteRepository<Pokemon> pokemonWriteRepository)
         {
-            this.definitionsRepository = definitionsRepository;
-            this.pokemonsRepository = pokemonsRepository;
-            this.trainersRepository = trainersRepository;
+            this.definitionsReadRepository = definitionsReadRepository;
+            this.trainersReadRepository = trainersReadRepository;
+            this.pokemonWriteRepository = pokemonWriteRepository;
         }
 
         public Task Handle(TrainerRegisteredEvent notification, CancellationToken cancellationToken)
         {
-            var trainer = this.trainersRepository.GetById(notification.Id);
+            var trainer = this.trainersReadRepository.GetById(notification.Id);
 
             var random = new Random(DateTime.Now.Millisecond);
-            var pokemons = this.definitionsRepository.GetAll();
+            var pokemons = this.definitionsReadRepository.GetAll();
             Enumerable.Range(1, RandomPokemonsOnRegister)
                 .Select(_ => random.Next(0, pokemons.Count()))
                 .Select(randomIndex => pokemons.ElementAt(randomIndex))
                 .Select(definition => new Pokemon(trainer, definition))
                 .ToList()
-                .ForEach(p =>
-                {
-                    this.pokemonsRepository.Add(p);
-                });
+                .ForEach(p => pokemonWriteRepository.Add(p));
 
-            pokemonsRepository.Save();
+            pokemonWriteRepository.Save();
             return Task.CompletedTask;
         }
     }

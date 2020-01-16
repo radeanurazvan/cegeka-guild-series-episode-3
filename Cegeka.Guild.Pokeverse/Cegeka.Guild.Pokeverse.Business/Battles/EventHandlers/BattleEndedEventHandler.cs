@@ -15,18 +15,20 @@ namespace Cegeka.Guild.Pokeverse.Business.Battles.EventHandlers
         private static int MaxExperienceGainedValue = 50;
         private static double WinnerBonusFactor = 0.5;
         
-        private readonly IRepository<Battle> battlesRepository;
+        private readonly IReadRepository<Battle> battlesReadRepository;
+        private readonly IWriteRepository<Battle> battlesWriteRepository;
         private readonly IMediator mediator;
 
-        public BattleEndedEventHandler(IRepository<Battle> battlesRepository, IMediator mediator)
+        public BattleEndedEventHandler(IReadRepository<Battle> battlesReadRepository, IWriteRepository<Battle> battlesWriteRepository, IMediator mediator)
         {
-            this.battlesRepository = battlesRepository;
+            this.battlesReadRepository = battlesReadRepository;
+            this.battlesWriteRepository = battlesWriteRepository;
             this.mediator = mediator;
         }
 
         public async Task Handle(BattleEndedEvent notification, CancellationToken cancellationToken)
         {
-            var battle = battlesRepository.GetById(notification.BattleId);
+            var battle = battlesReadRepository.GetById(notification.BattleId);
 
             var random = new Random(DateTime.Now.Millisecond);
             var experienceGained = random.Next(MinExperienceGainedValue, MaxExperienceGainedValue);
@@ -37,7 +39,7 @@ namespace Cegeka.Guild.Pokeverse.Business.Battles.EventHandlers
 
             var loser = battle.Loser;
             loser.Experience += experienceGained;
-            this.battlesRepository.Save();
+            this.battlesWriteRepository.Save();
 
             await this.mediator.Publish(new ExperienceGainedEvent(winner.Id), cancellationToken);
             await this.mediator.Publish(new ExperienceGainedEvent(loser.Id), cancellationToken);

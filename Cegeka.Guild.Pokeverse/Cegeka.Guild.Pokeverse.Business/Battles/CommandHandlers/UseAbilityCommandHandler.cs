@@ -13,20 +13,26 @@ namespace Cegeka.Guild.Pokeverse.Business.Battles.CommandHandlers
     internal sealed class UseAbilityCommandHandler : IRequestHandler<UseAbilityCommand>
     {
         
-        private readonly IRepository<Pokemon> pokemonsRepository;
-        private readonly IRepository<Battle> battlesRepository;
+        private readonly IReadRepository<Pokemon> pokemonsReadRepository;
+        private readonly IReadRepository<Battle> battlesReadRepository;
+        private readonly IWriteRepository<Battle> battlesWriteRepository;
         private readonly IMediator mediator;
 
-        public UseAbilityCommandHandler(IRepository<Pokemon> pokemonsRepository, IRepository<Battle> battlesRepository, IMediator mediator)
+        public UseAbilityCommandHandler(
+            IReadRepository<Pokemon> pokemonsReadRepository, 
+            IReadRepository<Battle> battlesReadRepository, 
+            IWriteRepository<Battle> battlesWriteRepository, 
+            IMediator mediator)
         {
-            this.pokemonsRepository = pokemonsRepository;
-            this.battlesRepository = battlesRepository;
+            this.pokemonsReadRepository = pokemonsReadRepository;
+            this.battlesReadRepository = battlesReadRepository;
+            this.battlesWriteRepository = battlesWriteRepository;
             this.mediator = mediator;
         }
 
         public async Task<Unit> Handle(UseAbilityCommand request, CancellationToken cancellationToken)
         {
-            var battle = this.battlesRepository.GetById(request.BattleId);
+            var battle = this.battlesReadRepository.GetById(request.BattleId);
             if (battle == null)
             {
                 throw new InvalidOperationException("Battle not found!");
@@ -42,7 +48,7 @@ namespace Cegeka.Guild.Pokeverse.Business.Battles.CommandHandlers
                 throw new InvalidOperationException("You are not the active player, wait for your turn!");
             }
 
-            var pokemonDealingDamage = this.pokemonsRepository.GetById(request.ParticipantId);
+            var pokemonDealingDamage = this.pokemonsReadRepository.GetById(request.ParticipantId);
             var ability = pokemonDealingDamage.Abilities.FirstOrDefault(a => a.Id == request.AbilityId);
             if (ability == null)
             {
@@ -71,7 +77,7 @@ namespace Cegeka.Guild.Pokeverse.Business.Battles.CommandHandlers
                 await mediator.Publish(new BattleEndedEvent(battle.Id), cancellationToken);
             }
 
-            battlesRepository.Save();
+            battlesWriteRepository.Save();
 
             return Unit.Value;
         }

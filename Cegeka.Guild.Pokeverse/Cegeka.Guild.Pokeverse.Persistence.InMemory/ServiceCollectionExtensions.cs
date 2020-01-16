@@ -9,8 +9,8 @@ namespace Cegeka.Guild.Pokeverse.Persistence.InMemory
     {
         public static IServiceCollection AddInMemoryPersistence(this IServiceCollection services)
         {
-            return services.AddSingleton(typeof(IRepository<>), typeof(GenericRepository<>))
-                .AddSingleton<IRepository<PokemonDefinition>, PokemonDefinitionsRepository>();
+            return services.AddSingleton(typeof(IReadRepository<>), typeof(GenericReadRepository<>))
+                .AddSingleton<IReadRepository<PokemonDefinition>, PokemonDefinitionsReadRepository>();
         }
     }
 }

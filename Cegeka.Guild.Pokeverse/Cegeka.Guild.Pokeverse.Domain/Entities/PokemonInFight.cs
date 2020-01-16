@@ -16,9 +16,9 @@ namespace Cegeka.Guild.Pokeverse.Domain.Entities
 
         public Guid PokemonId { get; set; }
 
-        public Guid AttackBattleId { get; set; }
+        public Guid? AttackBattleId { get; set; }
 
-        public Guid DefendBattleId { get; set; }
+        public Guid? DefendBattleId { get; set; }
 
         public int Health { get; set; }
     }

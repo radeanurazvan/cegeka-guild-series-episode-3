@@ -17,8 +17,7 @@ namespace Cegeka.Guild.Pokeverse.Domain.Entities
         public Pokemon(Trainer trainer, PokemonDefinition definition)
             : this()
         {
-            Definition = definition;
-
+            DefinitionId = definition.Id;
             TrainerId = trainer.Id;
         }
 
@@ -27,6 +26,8 @@ namespace Cegeka.Guild.Pokeverse.Domain.Entities
         public string Name => this.Definition.Name;
 
         public PokemonDefinition Definition { get; set; }
+
+        public Guid DefinitionId { get; set; }
 
         public int HealthPoints { get; set; }
 

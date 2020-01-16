@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Cegeka.Guild.Pokeverse.Api.Controllers
 {
+    [Route("api/battles")]
     public class BattlesController : ControllerBase
     {
         private readonly IBattleService battleService;

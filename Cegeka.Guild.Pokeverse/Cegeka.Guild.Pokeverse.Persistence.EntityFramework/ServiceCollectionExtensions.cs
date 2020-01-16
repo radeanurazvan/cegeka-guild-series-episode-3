@@ -1,4 +1,6 @@
 ﻿using Cegeka.Guild.Pokeverse.Domain.Abstracts;
+using Cegeka.Guild.Pokeverse.Domain.Entities;
+using Cegeka.Guild.Pokeverse.Persistence.EntityFramework.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,7 +13,10 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
         {
             return services
                 .AddDbContext<PokemonsContext>(options => options.UseSqlServer(configuration.GetConnectionString("PokeverseDatabase")))
-                .AddScoped(typeof(IRepository<>), typeof(EntityFrameworkGenericRepository<>))
+                .AddScoped(typeof(IReadRepository<>), typeof(EntityFrameworkGenericReadRepository<>))
+                .AddScoped<IReadRepository<Trainer>, TrainerReadRepository>()
+                .AddScoped<IReadRepository<Battle>, BattleReadRepository>()
+                .AddScoped(typeof(IWriteRepository<>), typeof(EntityFrameworkGenericWriteRepository<>))
                 .AddScoped<ISeedService, SeedService>();
         }
 

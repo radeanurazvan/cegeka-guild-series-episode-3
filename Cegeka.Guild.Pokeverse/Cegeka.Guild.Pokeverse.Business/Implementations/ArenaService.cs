@@ -9,16 +9,16 @@ namespace Cegeka.Guild.Pokeverse.Business.Implementations
 {
     internal class ArenaService : IArenaService
     {
-        private readonly IRepository<Battle> battleRepository;
+        private readonly IReadRepository<Battle> battleReadRepository;
 
-        public ArenaService(IRepository<Battle> battleRepository)
+        public ArenaService(IReadRepository<Battle> battleReadRepository)
         {
-            this.battleRepository = battleRepository;
+            this.battleReadRepository = battleReadRepository;
         }
 
         public IEnumerable<FinishedBattleModel> GetFinishedBattles()
         {
-            return battleRepository.GetAll()
+            return battleReadRepository.GetAll()
                 .Where(b => b.Winner != null)
                 .Select(b => new FinishedBattleModel
                 {
@@ -32,7 +32,7 @@ namespace Cegeka.Guild.Pokeverse.Business.Implementations
 
         public IEnumerable<OngoingBattleModel> GetOngoingBattles()
         {
-            return battleRepository.GetAll()
+            return battleReadRepository.GetAll()
                 .Where(b => b.Winner == null)
                 .Select(b => new OngoingBattleModel
                 {

@@ -9,12 +9,12 @@ namespace Cegeka.Guild.Pokeverse.Business.Trainer.CommandHandlers
 {
     internal sealed class RegisterTrainerCommandHandler : IRequestHandler<RegisterTrainerCommand>
     {
-        private readonly IRepository<Domain.Entities.Trainer> trainerRepository;
+        private readonly IWriteRepository<Domain.Entities.Trainer> trainerReadRepository;
         private readonly IMediator mediator;
 
-        public RegisterTrainerCommandHandler(IRepository<Domain.Entities.Trainer> trainerRepository, IMediator mediator)
+        public RegisterTrainerCommandHandler(IWriteRepository<Domain.Entities.Trainer> trainerReadRepository, IMediator mediator)
         {
-            this.trainerRepository = trainerRepository;
+            this.trainerReadRepository = trainerReadRepository;
             this.mediator = mediator;
         }
 
@@ -22,8 +22,8 @@ namespace Cegeka.Guild.Pokeverse.Business.Trainer.CommandHandlers
         {
             var trainer = new Domain.Entities.Trainer { Name = request.Name };
 
-            this.trainerRepository.Add(trainer);
-            this.trainerRepository.Save();
+            this.trainerReadRepository.Add(trainer);
+            this.trainerReadRepository.Save();
             this.mediator.Publish(new TrainerRegisteredEvent(trainer.Id), cancellationToken);
             return Task.FromResult(Unit.Value);
         }
