@@ -6,7 +6,7 @@ using Cegeka.Guild.Pokeverse.Domain.Entities;
 
 namespace Cegeka.Guild.Pokeverse.Persistence.InMemory.Implementations
 {
-    internal class PokemonDefinitionsReadRepository : IReadRepository<PokemonDefinition>
+    internal class PokemonDefinitionsRepository : IReadRepository<PokemonDefinition>, IWriteRepository<PokemonDefinition>
     {
         private readonly ICollection<PokemonDefinition> definitions = new List<PokemonDefinition>
         {

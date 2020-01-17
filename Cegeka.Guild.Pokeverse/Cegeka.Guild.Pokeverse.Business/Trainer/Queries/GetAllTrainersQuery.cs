@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Cegeka.Guild.Pokeverse.Business.Models;
+using Cegeka.Guild.Pokeverse.Business.Trainer.Models;
 using MediatR;
 
 namespace Cegeka.Guild.Pokeverse.Business.Trainer.Queries

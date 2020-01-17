@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Cegeka.Guild.Pokeverse.Business.Models
+namespace Cegeka.Guild.Pokeverse.Business.Trainer.Models
 {
     public class AbilityModel
     {

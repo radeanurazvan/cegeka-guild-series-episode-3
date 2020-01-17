@@ -10,7 +10,7 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
         private readonly IReadRepository<PokemonDefinition> definitionsReadRepository;
         private readonly IWriteRepository<PokemonDefinition> definitionsWriteRepository;
 
-        private readonly ICollection<PokemonDefinition> definitions = new List<PokemonDefinition>
+        private readonly ICollection<PokemonDefinition> defaultPokemonDefinitions = new List<PokemonDefinition>
         {
             new PokemonDefinition
             {
@@ -103,7 +103,7 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
                 return;
             }
 
-            definitions.ToList().ForEach(definitionsWriteRepository.Add);
+            defaultPokemonDefinitions.ToList().ForEach(definitionsWriteRepository.Add);
             definitionsWriteRepository.Save();
         }
     }

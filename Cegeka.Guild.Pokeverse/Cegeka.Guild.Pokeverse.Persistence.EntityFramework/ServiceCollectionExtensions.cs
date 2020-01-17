@@ -16,6 +16,7 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
                 .AddScoped(typeof(IReadRepository<>), typeof(EntityFrameworkGenericReadRepository<>))
                 .AddScoped<IReadRepository<Trainer>, TrainerReadRepository>()
                 .AddScoped<IReadRepository<Battle>, BattleReadRepository>()
+                .AddScoped<IReadRepository<Pokemon>, PokemonReadRepository>()
                 .AddScoped(typeof(IWriteRepository<>), typeof(EntityFrameworkGenericWriteRepository<>))
                 .AddScoped<ISeedService, SeedService>();
         }

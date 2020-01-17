@@ -1,4 +1,6 @@
-﻿using Cegeka.Guild.Pokeverse.Business.Abstracts;
+﻿using System.Threading.Tasks;
+using Cegeka.Guild.Pokeverse.Business.Arena.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cegeka.Guild.Pokeverse.Api.Controllers
@@ -6,25 +8,25 @@ namespace Cegeka.Guild.Pokeverse.Api.Controllers
     [Route("api/arena")]
     public class ArenaController : ControllerBase
     {
-        private readonly IArenaService arenaService;
+        private readonly IMediator mediator;
 
-        public ArenaController(IArenaService arenaService)
+        public ArenaController(IMediator mediator)
         {
-            this.arenaService = arenaService;
+            this.mediator = mediator;
         }
 
         [HttpGet("ongoing")]
-        public IActionResult GetOngoingBattles()
+        public async Task<IActionResult> GetOngoingBattles()
         {
-            var battles = this.arenaService.GetOngoingBattles();
+            var battles = await this.mediator.Send(new GetOngoingBattlesQuery());
             return Ok(battles);
         }
 
 
         [HttpGet("finished")]
-        public IActionResult GetFinishedBattles()
+        public async Task<IActionResult> GetFinishedBattles()
         {
-            var battles = this.arenaService.GetFinishedBattles();
+            var battles = await this.mediator.Send(new GetFinishedBattlesQuery());
             return Ok(battles);
         }
     }
