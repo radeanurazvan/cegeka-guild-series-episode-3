@@ -19,7 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cegeka.Guild.Pokeverse.Pers
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cegeka.Guild.Pokeverse.Infrastructure", "Cegeka.Guild.Pokeverse.Infrastructure\Cegeka.Guild.Pokeverse.Infrastructure.csproj", "{A622CF9C-9EAD-486A-93FB-782161E6E674}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cegeka.Guild.Pokeverse.Persistence.EntityFramework", "Cegeka.Guild.Pokeverse.Persistence.EntityFramework\Cegeka.Guild.Pokeverse.Persistence.EntityFramework.csproj", "{F91BD748-2623-4750-80DC-99490E20A9A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cegeka.Guild.Pokeverse.Persistence.EntityFramework", "Cegeka.Guild.Pokeverse.Persistence.EntityFramework\Cegeka.Guild.Pokeverse.Persistence.EntityFramework.csproj", "{F91BD748-2623-4750-80DC-99490E20A9A7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04. Crosscutting Concerns", "04. Crosscutting Concerns", "{C58B9D3A-C263-4A6B-BF83-E0506441720F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cegeka.Guild.Pokeverse.Common", "Cegeka.Guild.Pokeverse.Common\Cegeka.Guild.Pokeverse.Common.csproj", "{8193EA21-BE33-480F-9025-702E9876E37D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,10 @@ Global
 		{F91BD748-2623-4750-80DC-99490E20A9A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F91BD748-2623-4750-80DC-99490E20A9A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F91BD748-2623-4750-80DC-99490E20A9A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8193EA21-BE33-480F-9025-702E9876E37D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8193EA21-BE33-480F-9025-702E9876E37D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8193EA21-BE33-480F-9025-702E9876E37D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8193EA21-BE33-480F-9025-702E9876E37D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +70,7 @@ Global
 		{B2D44C8E-EC61-484A-A6D6-3476549F7D41} = {89692A89-F9DA-4565-B05D-059BFFB3B3B4}
 		{A622CF9C-9EAD-486A-93FB-782161E6E674} = {89692A89-F9DA-4565-B05D-059BFFB3B3B4}
 		{F91BD748-2623-4750-80DC-99490E20A9A7} = {89692A89-F9DA-4565-B05D-059BFFB3B3B4}
+		{8193EA21-BE33-480F-9025-702E9876E37D} = {C58B9D3A-C263-4A6B-BF83-E0506441720F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EC544335-5FBF-4123-9225-066AA7019530}
