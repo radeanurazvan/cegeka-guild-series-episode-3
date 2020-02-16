@@ -1,11 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Cegeka.Guild.Pokeverse.Business.Battles.Events;
-using Cegeka.Guild.Pokeverse.Domain.Abstracts;
-using Cegeka.Guild.Pokeverse.Domain.Entities;
+using Cegeka.Guild.Pokeverse.Domain;
 using MediatR;
 
-namespace Cegeka.Guild.Pokeverse.Business.Battles.EventHandlers
+namespace Cegeka.Guild.Pokeverse.Business
 {
     internal sealed class ExperienceGainedEventHandler : INotificationHandler<ExperienceGainedEvent>
     {

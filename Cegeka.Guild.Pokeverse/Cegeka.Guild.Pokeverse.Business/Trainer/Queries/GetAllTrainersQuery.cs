@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using Cegeka.Guild.Pokeverse.Business.Trainer.Models;
 using MediatR;
 
-namespace Cegeka.Guild.Pokeverse.Business.Trainer.Queries
+namespace Cegeka.Guild.Pokeverse.Business
 {
     public sealed class GetAllTrainersQuery : IRequest<IEnumerable<TrainerModel>>
     {

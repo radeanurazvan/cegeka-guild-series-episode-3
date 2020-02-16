@@ -1,7 +1,7 @@
 ﻿using System;
 using MediatR;
 
-namespace Cegeka.Guild.Pokeverse.Business.Trainer.Events
+namespace Cegeka.Guild.Pokeverse.Business
 {
     public sealed class TrainerRegisteredEvent : INotification
     {

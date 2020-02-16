@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using Cegeka.Guild.Pokeverse.Business.Arena.Queries;
+using Cegeka.Guild.Pokeverse.Business;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Cegeka.Guild.Pokeverse.Api.Controllers
+namespace Cegeka.Guild.Pokeverse.Api
 {
     [Route("api/arena")]
     public class ArenaController : ControllerBase

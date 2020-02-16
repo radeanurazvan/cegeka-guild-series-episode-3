@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Cegeka.Guild.Pokeverse.Domain.Entities
+namespace Cegeka.Guild.Pokeverse.Domain
 {
     public class Trainer : Entity
     {

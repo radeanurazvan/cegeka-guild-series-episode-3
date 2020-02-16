@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using Cegeka.Guild.Pokeverse.Domain.Entities;
+using Cegeka.Guild.Pokeverse.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework.Repositories
+namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
 {
     internal sealed class TrainerReadRepository : BaseEntityFrameworkGenericReadRepository<Trainer>
     {

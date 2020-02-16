@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework.Migrations
+namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
 {
     public partial class RemovedSeparateIds : Migration
     {

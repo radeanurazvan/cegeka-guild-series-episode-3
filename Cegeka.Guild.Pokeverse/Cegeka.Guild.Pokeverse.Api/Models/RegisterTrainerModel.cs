@@ -1,4 +1,4 @@
-﻿namespace Cegeka.Guild.Pokeverse.Api.Models
+﻿namespace Cegeka.Guild.Pokeverse.Api
 {
     public class RegisterTrainerModel
     {

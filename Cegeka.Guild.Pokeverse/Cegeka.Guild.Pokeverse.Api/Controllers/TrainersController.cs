@@ -1,11 +1,9 @@
 ﻿using System.Threading.Tasks;
-using Cegeka.Guild.Pokeverse.Api.Models;
-using Cegeka.Guild.Pokeverse.Business.Trainer.Commands;
-using Cegeka.Guild.Pokeverse.Business.Trainer.Queries;
+using Cegeka.Guild.Pokeverse.Business;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Cegeka.Guild.Pokeverse.Api.Controllers
+namespace Cegeka.Guild.Pokeverse.Api
 {
     [Route("api/trainers")]
     public class TrainersController : ControllerBase

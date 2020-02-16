@@ -2,13 +2,10 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Cegeka.Guild.Pokeverse.Business.Arena.Models;
-using Cegeka.Guild.Pokeverse.Business.Arena.Queries;
-using Cegeka.Guild.Pokeverse.Domain.Abstracts;
-using Cegeka.Guild.Pokeverse.Domain.Entities;
+using Cegeka.Guild.Pokeverse.Domain;
 using MediatR;
 
-namespace Cegeka.Guild.Pokeverse.Business.Arena.QueryHandlers
+namespace Cegeka.Guild.Pokeverse.Business
 {
     internal sealed class GetOngoingBattlesQueryHandler : IRequestHandler<GetOngoingBattlesQuery, IEnumerable<OngoingBattleModel>>
     {

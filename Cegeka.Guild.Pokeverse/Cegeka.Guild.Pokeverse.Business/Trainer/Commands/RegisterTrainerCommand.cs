@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Cegeka.Guild.Pokeverse.Business.Trainer.Commands
+namespace Cegeka.Guild.Pokeverse.Business
 {
     public sealed class RegisterTrainerCommand : IRequest
     {

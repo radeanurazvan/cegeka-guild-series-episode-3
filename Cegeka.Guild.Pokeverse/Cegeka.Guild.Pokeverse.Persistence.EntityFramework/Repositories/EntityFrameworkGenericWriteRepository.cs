@@ -1,7 +1,6 @@
-﻿using Cegeka.Guild.Pokeverse.Domain.Abstracts;
-using Cegeka.Guild.Pokeverse.Domain.Entities;
+﻿using Cegeka.Guild.Pokeverse.Domain;
 
-namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework.Repositories
+namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
 {
     internal sealed class EntityFrameworkGenericWriteRepository<T> : IWriteRepository<T>
         where T : Entity

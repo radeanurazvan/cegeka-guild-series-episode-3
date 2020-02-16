@@ -1,6 +1,4 @@
-﻿using Cegeka.Guild.Pokeverse.Domain.Entities;
-
-namespace Cegeka.Guild.Pokeverse.Domain.Abstracts
+﻿namespace Cegeka.Guild.Pokeverse.Domain
 {
     public interface IWriteRepository<in T> 
         where T : Entity

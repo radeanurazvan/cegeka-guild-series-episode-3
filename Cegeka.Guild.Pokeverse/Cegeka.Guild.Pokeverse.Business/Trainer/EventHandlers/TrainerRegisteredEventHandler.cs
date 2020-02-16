@@ -2,24 +2,22 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Cegeka.Guild.Pokeverse.Business.Trainer.Events;
-using Cegeka.Guild.Pokeverse.Domain.Abstracts;
-using Cegeka.Guild.Pokeverse.Domain.Entities;
+using Cegeka.Guild.Pokeverse.Domain;
 using MediatR;
 
-namespace Cegeka.Guild.Pokeverse.Business.Trainer.EventHandlers
+namespace Cegeka.Guild.Pokeverse.Business
 {
     internal sealed class TrainerRegisteredEventHandler : INotificationHandler<TrainerRegisteredEvent>
     {
         private const int RandomPokemonsOnRegister = 2;
 
         private readonly IReadRepository<PokemonDefinition> definitionsReadRepository;
-        private readonly IReadRepository<Domain.Entities.Trainer> trainersReadRepository;
+        private readonly IReadRepository<Trainer> trainersReadRepository;
         private readonly IWriteRepository<Pokemon> pokemonWriteRepository;
 
         public TrainerRegisteredEventHandler(
             IReadRepository<PokemonDefinition> definitionsReadRepository, 
-            IReadRepository<Domain.Entities.Trainer> trainersReadRepository,
+            IReadRepository<Trainer> trainersReadRepository,
             IWriteRepository<Pokemon> pokemonWriteRepository)
         {
             this.definitionsReadRepository = definitionsReadRepository;

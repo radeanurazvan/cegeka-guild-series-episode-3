@@ -1,8 +1,8 @@
-﻿using Cegeka.Guild.Pokeverse.Domain.Entities;
+﻿using Cegeka.Guild.Pokeverse.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework.Configurations
+namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
 {
     public class BattleConfiguration : IEntityTypeConfiguration<Battle>
     {

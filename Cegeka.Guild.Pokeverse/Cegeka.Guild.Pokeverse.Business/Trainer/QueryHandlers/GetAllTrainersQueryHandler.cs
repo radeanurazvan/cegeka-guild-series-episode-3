@@ -2,19 +2,17 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Cegeka.Guild.Pokeverse.Business.Trainer.Models;
-using Cegeka.Guild.Pokeverse.Business.Trainer.Queries;
-using Cegeka.Guild.Pokeverse.Domain.Abstracts;
+using Cegeka.Guild.Pokeverse.Domain;
 using MediatR;
 
-namespace Cegeka.Guild.Pokeverse.Business.Trainer.QueryHandlers
+namespace Cegeka.Guild.Pokeverse.Business
 {
     internal sealed class GetAllTrainersQueryHandler : IRequestHandler<GetAllTrainersQuery, IEnumerable<TrainerModel>>
     {
         
-        private readonly IReadRepository<Domain.Entities.Trainer> trainerReadRepository;
+        private readonly IReadRepository<Trainer> trainerReadRepository;
 
-        public GetAllTrainersQueryHandler(IReadRepository<Domain.Entities.Trainer> trainerReadRepository)
+        public GetAllTrainersQueryHandler(IReadRepository<Trainer> trainerReadRepository)
         {
             this.trainerReadRepository = trainerReadRepository;
         }

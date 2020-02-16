@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cegeka.Guild.Pokeverse.Domain.Abstracts;
-using Cegeka.Guild.Pokeverse.Domain.Entities;
+using Cegeka.Guild.Pokeverse.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework.Repositories
+namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
 {
     internal abstract class BaseEntityFrameworkGenericReadRepository<T> : IReadRepository<T>
         where T : Entity

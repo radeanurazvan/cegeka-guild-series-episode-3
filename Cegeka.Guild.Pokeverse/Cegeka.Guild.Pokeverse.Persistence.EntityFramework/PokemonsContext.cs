@@ -1,5 +1,4 @@
-﻿using Cegeka.Guild.Pokeverse.Domain.Entities;
-using Cegeka.Guild.Pokeverse.Persistence.EntityFramework.Configurations;
+﻿using Cegeka.Guild.Pokeverse.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework

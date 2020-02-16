@@ -1,7 +1,7 @@
 ﻿using System;
 using MediatR;
 
-namespace Cegeka.Guild.Pokeverse.Business.Battles.Commands
+namespace Cegeka.Guild.Pokeverse.Business
 {
     public sealed class StartBattleCommand : IRequest
     {

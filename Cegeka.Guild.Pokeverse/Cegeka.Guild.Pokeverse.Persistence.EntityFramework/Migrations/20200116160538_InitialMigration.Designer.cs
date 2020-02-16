@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework.Migrations
+namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
 {
     [DbContext(typeof(PokemonsContext))]
     [Migration("20200116160538_InitialMigration")]

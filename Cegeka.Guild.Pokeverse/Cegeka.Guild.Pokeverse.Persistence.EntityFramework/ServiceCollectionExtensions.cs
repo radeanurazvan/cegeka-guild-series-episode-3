@@ -1,6 +1,4 @@
-﻿using Cegeka.Guild.Pokeverse.Domain.Abstracts;
-using Cegeka.Guild.Pokeverse.Domain.Entities;
-using Cegeka.Guild.Pokeverse.Persistence.EntityFramework.Repositories;
+﻿using Cegeka.Guild.Pokeverse.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

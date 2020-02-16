@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Cegeka.Guild.Pokeverse.Api.Models
+namespace Cegeka.Guild.Pokeverse.Api
 {
     public class StartBattleModel
     {

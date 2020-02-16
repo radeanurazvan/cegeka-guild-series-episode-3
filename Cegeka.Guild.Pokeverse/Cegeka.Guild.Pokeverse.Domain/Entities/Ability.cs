@@ -1,4 +1,4 @@
-﻿namespace Cegeka.Guild.Pokeverse.Domain.Entities
+﻿namespace Cegeka.Guild.Pokeverse.Domain
 {
     public class Ability : Entity
     {
