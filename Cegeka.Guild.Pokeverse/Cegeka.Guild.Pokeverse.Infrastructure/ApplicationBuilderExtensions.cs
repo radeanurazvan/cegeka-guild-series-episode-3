@@ -11,7 +11,7 @@ namespace Cegeka.Guild.Pokeverse.Infrastructure
             using (var scope = app.ApplicationServices.CreateScope())
             {
                 var seedService = scope.ServiceProvider.GetService<ISeedService>();
-                seedService.Seed();
+                seedService.Seed().GetAwaiter().GetResult();
             }
             
             return app;

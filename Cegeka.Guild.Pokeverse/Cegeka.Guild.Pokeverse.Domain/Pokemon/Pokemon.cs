@@ -55,7 +55,8 @@ namespace Cegeka.Guild.Pokeverse.Domain
                 .Ensure(() => this.TrainerId != other.TrainerId, Messages.SiblingsCannotFight)
                 .Ensure(() => !this.IsInBattle, Messages.PokemonAlreadyInBattle)
                 .Ensure(() => !other.IsInBattle, Messages.PokemonAlreadyInBattle)
-                .Map(() => Battle.Create(this, other));
+                .Map(() => Battle.Create(this, other))
+                .Tap(b => this.battles.Add(new PokemonBattle(this, b)));
         }
 
         public Result UseAbility(Guid battleId, Guid abilityId)
@@ -86,7 +87,7 @@ namespace Cegeka.Guild.Pokeverse.Domain
 
         public static class Expressions
         {
-            public static string Battles = $"{nameof(battles)}.{nameof(PokemonBattle.Battle)}";
+            public static string Battles = nameof(battles);
         }
     }
 }

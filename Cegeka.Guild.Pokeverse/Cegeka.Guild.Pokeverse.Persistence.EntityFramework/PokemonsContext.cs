@@ -13,25 +13,22 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
         public PokemonsContext(DbContextOptions options)
             : base(options)
         {
-            Database.Migrate();   
         }
 
-        public DbSet<PokemonDefinition> PokemonDefinitions { get; set; }
+        public DbSet<PokemonDefinition> PokemonDefinitions { get; private set; }
 
-        public DbSet<Trainer> Trainers { get; set; }
+        public DbSet<Trainer> Trainers { get; private set; }
 
-        public DbSet<Battle> Battles { get; set; }
+        public DbSet<Battle> Battles { get; private set; }
 
         public static DbContextOptions GetOptions() => new DbContextOptionsBuilder()
-            .UseSqlServer("Data Source=.; Initial Catalog=Pokeverse;Trusted_Connection=True;")
+            .UseSqlServer("Data Source=.; Initial Catalog=Pokeverse;User=sa;Password=Pass4Dev1!;")
             .Options;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            new PokemonInFightConfiguration().Configure(modelBuilder.Entity<PokemonInFight>());
-            new BattleConfiguration().Configure(modelBuilder.Entity<Battle>());
-            new PokemonConfiguration().Configure(modelBuilder.Entity<Pokemon>());
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(PokemonsContext).Assembly);
         }
     }
 }

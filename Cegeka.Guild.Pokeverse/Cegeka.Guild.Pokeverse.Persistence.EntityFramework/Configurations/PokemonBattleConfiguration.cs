@@ -9,6 +9,7 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
         public void Configure(EntityTypeBuilder<PokemonBattle> builder)
         {
             builder.HasKey(b => b.Id);
+            builder.Property(b => b.Id).ValueGeneratedNever();
 
             builder.HasOne(typeof(Pokemon))
                 .WithMany(Pokemon.Expressions.Battles)
@@ -17,8 +18,8 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
 
             builder.HasOne(b => b.Battle)
                 .WithOne()
-                .HasPrincipalKey(nameof(Battle.Id))
-                .HasForeignKey(nameof(PokemonBattle.BattleId));
+                .HasPrincipalKey<Battle>(nameof(Battle.Id))
+                .HasForeignKey<PokemonBattle>(nameof(PokemonBattle.BattleId));
         }
     }
 }

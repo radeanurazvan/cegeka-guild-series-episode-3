@@ -9,6 +9,14 @@ namespace Cegeka.Guild.Pokeverse.Domain
         {
         }
 
+        internal PokemonBattle(Pokemon pokemon, Battle battle)
+            : this()
+        {
+            BattleId = battle.Id;
+            Battle = battle;
+            PokemonId = pokemon.Id;
+        }
+
         public Guid BattleId { get; private set; }
 
         public Battle Battle { get; private set; }

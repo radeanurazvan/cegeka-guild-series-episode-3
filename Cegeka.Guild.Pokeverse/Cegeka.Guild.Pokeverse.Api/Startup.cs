@@ -1,5 +1,6 @@
 using Cegeka.Guild.Pokeverse.Business;
 using Cegeka.Guild.Pokeverse.Infrastructure;
+using Cegeka.Guild.Pokeverse.Persistence.EntityFramework;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -46,6 +47,7 @@ namespace Cegeka.Guild.Pokeverse.Api
                 {
                     endpoints.MapControllers();
                 })
+                .UseMigrations()
                 .SeedData();
         }
     }
