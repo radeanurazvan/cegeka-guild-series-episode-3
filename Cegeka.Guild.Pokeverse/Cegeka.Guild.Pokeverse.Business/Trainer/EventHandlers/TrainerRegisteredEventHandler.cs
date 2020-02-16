@@ -34,7 +34,9 @@ namespace Cegeka.Guild.Pokeverse.Business
             Enumerable.Range(1, RandomPokemonsOnRegister)
                 .Select(_ => random.Next(0, pokemons.Count()))
                 .Select(randomIndex => pokemons.ElementAt(randomIndex))
-                .Select(definition => new Pokemon(trainer, definition))
+                .Select(definition => Pokemon.Create(trainer, definition))
+                .Where(r => r.IsSuccess)
+                .Select(r => r.Value)
                 .ToList()
                 .ForEach(p => pokemonWriteRepository.Add(p));
 

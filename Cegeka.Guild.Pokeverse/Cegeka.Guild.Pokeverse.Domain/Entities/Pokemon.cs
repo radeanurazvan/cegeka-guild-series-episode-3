@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Cegeka.Guild.Pokeverse.Common;
+using Cegeka.Guild.Pokeverse.Common.Resources;
+using CSharpFunctionalExtensions;
 
 namespace Cegeka.Guild.Pokeverse.Domain
 {
@@ -15,30 +17,38 @@ namespace Cegeka.Guild.Pokeverse.Domain
             Experience = 0;
         }
 
-        public Pokemon(Trainer trainer, PokemonDefinition definition)
-            : this()
+        private Pokemon(Trainer trainer, PokemonDefinition definition)
         {
             DefinitionId = definition.Id;
             TrainerId = trainer.Id;
         }
 
-        public Guid TrainerId { get; set; }
+        public static Result<Pokemon> Create(Trainer trainer, PokemonDefinition definition)
+        {
+            var trainerResult = Result.FailureIf(trainer == null, Messages.InvalidTrainer);
+            var definitionResult = Result.FailureIf(definition == null, Messages.InvalidPokemonDefinition);
+
+            return Result.FirstFailureOrSuccess(trainerResult, definitionResult)
+                .Map(() => new Pokemon(trainer, definition));
+        }
+
+        public Guid TrainerId { get; private set; }
+
+        public PokemonDefinition Definition { get; private set; }
+
+        public Guid DefinitionId { get; private set; }
+
+        public int HealthPoints { get; private set; }
+
+        public int CriticalStrikeChancePoints { get; private set; }
+
+        public int DamagePoints { get; private set; }
+
+        public int CurrentLevel { get; private set; }
+
+        public int Experience { get; private set; }
 
         public string Name => this.Definition.Name;
-
-        public PokemonDefinition Definition { get; set; }
-
-        public Guid DefinitionId { get; set; }
-
-        public int HealthPoints { get; set; }
-
-        public int CriticalStrikeChancePoints { get; set; }
-
-        public int DamagePoints { get; set; }
-
-        public int CurrentLevel { get; set; }
-
-        public int Experience { get; set; }
 
         public ICollection<Ability> Abilities => this.Definition.Abilities;
     }

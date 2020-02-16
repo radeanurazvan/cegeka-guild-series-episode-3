@@ -61,6 +61,24 @@ namespace Cegeka.Guild.Pokeverse.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The pokemon definition is invalid!.
+        /// </summary>
+        public static string InvalidPokemonDefinition {
+            get {
+                return ResourceManager.GetString("InvalidPokemonDefinition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The trainer is invalid!.
+        /// </summary>
+        public static string InvalidTrainer {
+            get {
+                return ResourceManager.GetString("InvalidTrainer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The trainer name is invalid!.
         /// </summary>
         public static string InvalidTrainerName {
