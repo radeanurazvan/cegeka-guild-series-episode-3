@@ -25,7 +25,7 @@ namespace Cegeka.Guild.Pokeverse.Business
 
         public async Task Handle(BattleEndedEvent notification, CancellationToken cancellationToken)
         {
-            var battle = await battlesReadRepository.GetById(notification.BattleId);
+            var battle = (await battlesReadRepository.GetById(notification.BattleId)).Value;
 
             var random = new Random(DateTime.Now.Millisecond);
             var experienceGained = random.Next(MinExperienceGainedValue, MaxExperienceGainedValue);

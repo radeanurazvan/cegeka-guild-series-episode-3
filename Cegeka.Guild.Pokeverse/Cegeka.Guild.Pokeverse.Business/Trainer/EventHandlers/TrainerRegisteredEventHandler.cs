@@ -27,7 +27,7 @@ namespace Cegeka.Guild.Pokeverse.Business
 
         public async Task Handle(TrainerRegisteredEvent notification, CancellationToken cancellationToken)
         {
-            var trainer = await this.trainersReadRepository.GetById(notification.Id);
+            var trainer = (await this.trainersReadRepository.GetById(notification.Id)).Value;
 
             var random = new Random(DateTime.Now.Millisecond);
             var pokemons = await this.definitionsReadRepository.GetAll();

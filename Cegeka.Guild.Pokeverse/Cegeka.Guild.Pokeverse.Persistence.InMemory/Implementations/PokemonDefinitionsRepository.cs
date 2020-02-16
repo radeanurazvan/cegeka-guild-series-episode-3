@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cegeka.Guild.Pokeverse.Common;
 using Cegeka.Guild.Pokeverse.Domain;
+using CSharpFunctionalExtensions;
 
 namespace Cegeka.Guild.Pokeverse.Persistence.InMemory
 {
@@ -89,7 +91,7 @@ namespace Cegeka.Guild.Pokeverse.Persistence.InMemory
 
         public Task<IEnumerable<PokemonDefinition>> GetAll() => Task.FromResult<IEnumerable<PokemonDefinition>>(definitions);
 
-        public Task<PokemonDefinition> GetById(Guid id) => Task.FromResult(definitions.FirstOrDefault(p => p.Id == id));
+        public Task<Maybe<PokemonDefinition>> GetById(Guid id) => Task.FromResult(definitions.FirstOrNothing(p => p.Id == id));
 
         public Task Add(PokemonDefinition entity)
         {

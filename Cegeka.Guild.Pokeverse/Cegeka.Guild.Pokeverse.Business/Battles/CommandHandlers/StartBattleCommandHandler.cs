@@ -39,8 +39,8 @@ namespace Cegeka.Guild.Pokeverse.Business
                 throw new InvalidOperationException("Pokemons already in battle!");
             }
 
-            var attacker = await this.pokemonsReadRepository.GetById(request.AttackerId);
-            var defender = await this.pokemonsReadRepository.GetById(request.DefenderId);
+            var attacker = (await this.pokemonsReadRepository.GetById(request.AttackerId)).Value;
+            var defender = (await this.pokemonsReadRepository.GetById(request.DefenderId)).Value;
 
             if (attacker.TrainerId == defender.TrainerId)
             {

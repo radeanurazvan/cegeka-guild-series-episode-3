@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Cegeka.Guild.Pokeverse.Common;
 using CSharpFunctionalExtensions;
 
 namespace Cegeka.Guild.Pokeverse.Domain

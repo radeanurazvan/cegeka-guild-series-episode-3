@@ -19,7 +19,7 @@ namespace Cegeka.Guild.Pokeverse.Business
 
         public async Task Handle(ExperienceGainedEvent notification, CancellationToken cancellationToken)
         {
-            var pokemon = await this.pokemonReadRepository.GetById(notification.PokemonId);
+            var pokemon = (await this.pokemonReadRepository.GetById(notification.PokemonId)).Value;
             if(pokemon.Experience > pokemon.CurrentLevel * ExperienceThreshold)
             {
                 pokemon.CurrentLevel++;

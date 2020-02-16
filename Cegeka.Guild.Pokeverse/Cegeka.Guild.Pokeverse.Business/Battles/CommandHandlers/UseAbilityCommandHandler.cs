@@ -29,7 +29,7 @@ namespace Cegeka.Guild.Pokeverse.Business
 
         public async Task<Unit> Handle(UseAbilityCommand request, CancellationToken cancellationToken)
         {
-            var battle = await this.battlesReadRepository.GetById(request.BattleId);
+            var battle = (await this.battlesReadRepository.GetById(request.BattleId)).Value ;
             if (battle == null)
             {
                 throw new InvalidOperationException("Battle not found!");
@@ -45,7 +45,7 @@ namespace Cegeka.Guild.Pokeverse.Business
                 throw new InvalidOperationException("You are not the active player, wait for your turn!");
             }
 
-            var pokemonDealingDamage = await this.pokemonsReadRepository.GetById(request.ParticipantId);
+            var pokemonDealingDamage = (await this.pokemonsReadRepository.GetById(request.ParticipantId)).Value;
             var ability = pokemonDealingDamage.Abilities.FirstOrDefault(a => a.Id == request.AbilityId);
             if (ability == null)
             {

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Cegeka.Guild.Pokeverse.Common;
 using Cegeka.Guild.Pokeverse.Domain;
 
 namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
