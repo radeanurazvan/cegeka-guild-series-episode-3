@@ -4,14 +4,16 @@ using Cegeka.Guild.Pokeverse.Persistence.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework.Migrations
 {
     [DbContext(typeof(PokemonsContext))]
-    partial class PokemonsContextModelSnapshot : ModelSnapshot
+    [Migration("20200216090655_RemovedSeparateIds")]
+    partial class RemovedSeparateIds
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -142,13 +144,23 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework.Migrations
 
             modelBuilder.Entity("Cegeka.Guild.Pokeverse.Domain.Entities.PokemonInFight", b =>
                 {
-                    b.Property<Guid>("PokemonId")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BattleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Health")
                         .HasColumnType("int");
 
-                    b.HasKey("PokemonId");
+                    b.Property<Guid>("PokemonId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PokemonId")
+                        .IsUnique();
 
                     b.ToTable("PokemonInFight");
                 });

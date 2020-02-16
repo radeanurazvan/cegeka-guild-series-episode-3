@@ -4,14 +4,16 @@ using Cegeka.Guild.Pokeverse.Persistence.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework.Migrations
 {
     [DbContext(typeof(PokemonsContext))]
-    partial class PokemonsContextModelSnapshot : ModelSnapshot
+    [Migration("20200216091326_ChangedBattleForeignKeys")]
+    partial class ChangedBattleForeignKeys
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,6 +145,9 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework.Migrations
             modelBuilder.Entity("Cegeka.Guild.Pokeverse.Domain.Entities.PokemonInFight", b =>
                 {
                     b.Property<Guid>("PokemonId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BattleId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Health")

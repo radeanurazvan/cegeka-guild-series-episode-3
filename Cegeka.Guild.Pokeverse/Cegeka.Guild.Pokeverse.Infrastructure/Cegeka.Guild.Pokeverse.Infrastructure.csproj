@@ -6,18 +6,13 @@
 
   <ItemGroup>
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Cegeka.Guild.Pokeverse.Persistence.EntityFramework\Cegeka.Guild.Pokeverse.Persistence.EntityFramework.csproj" />
     <ProjectReference Include="..\Cegeka.Guild.Pokeverse.Persistence.InMemory\Cegeka.Guild.Pokeverse.Persistence.InMemory.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Microsoft.AspNetCore.Http.Abstractions">
-      <HintPath>..\..\..\..\..\Program Files\dotnet\packs\Microsoft.AspNetCore.App.Ref\3.0.0\ref\netcoreapp3.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

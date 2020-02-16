@@ -10,12 +10,14 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework.Configurations
         {
             builder.HasOne(battle => battle.Attacker)
                 .WithOne()
-                .HasForeignKey<PokemonInFight>(fight => fight.AttackBattleId)
+                .HasPrincipalKey<PokemonInFight>(p => p.PokemonId)
+                .HasForeignKey<Battle>(b => b.AttackerId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(battle => battle.Defender)
                 .WithOne()
-                .HasForeignKey<PokemonInFight>(fight => fight.DefendBattleId)
+                .HasPrincipalKey<PokemonInFight>(p => p.PokemonId)
+                .HasForeignKey<Battle>(b => b.DefenderId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(x => x.Winner)

@@ -8,6 +8,7 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework.Configurations
     {
         public void Configure(EntityTypeBuilder<PokemonInFight> builder)
         {
+            builder.HasKey(p => p.PokemonId);
             builder.HasOne(x => x.Pokemon)
                 .WithOne()
                 .HasForeignKey<PokemonInFight>(x => x.PokemonId)
