@@ -16,9 +16,9 @@ namespace Cegeka.Guild.Pokeverse.Business
             this.battleReadRepository = battleReadRepository;
         }
 
-        public Task<IEnumerable<OngoingBattleModel>> Handle(GetOngoingBattlesQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<OngoingBattleModel>> Handle(GetOngoingBattlesQuery request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(battleReadRepository.GetAll()
+            return (await battleReadRepository.GetAll())
                 .Where(b => b.Winner == null)
                 .Select(b => new OngoingBattleModel
                 {
@@ -28,7 +28,7 @@ namespace Cegeka.Guild.Pokeverse.Business
                     Defender = b.Defender.Pokemon.Name,
                     DefenderHealth = b.Defender.Health,
                     StartedAt = b.StartedAt
-                }));
+                });
         }
     }
 }

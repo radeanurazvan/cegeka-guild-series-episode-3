@@ -24,7 +24,7 @@ namespace Cegeka.Guild.Pokeverse.Business
             this.battlesWriteRepository = battlesWriteRepository;
         }
 
-        public Task<Unit> Handle(StartBattleCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(StartBattleCommand request, CancellationToken cancellationToken)
         {
             if (request.AttackerId== request.DefenderId)
             {
@@ -32,15 +32,15 @@ namespace Cegeka.Guild.Pokeverse.Business
             }
 
             var participants = new List<Guid> {request.AttackerId, request.DefenderId};
-            var pokemonsAlreadyInBattle = this.battlesReadRepository.GetAll()
+            var pokemonsAlreadyInBattle = (await this.battlesReadRepository.GetAll())
                 .Any(b => participants.Contains(b.AttackerId) || participants.Contains(b.DefenderId));
             if (pokemonsAlreadyInBattle)
             {
                 throw new InvalidOperationException("Pokemons already in battle!");
             }
 
-            var attacker = this.pokemonsReadRepository.GetById(request.AttackerId);
-            var defender = this.pokemonsReadRepository.GetById(request.DefenderId);
+            var attacker = await this.pokemonsReadRepository.GetById(request.AttackerId);
+            var defender = await this.pokemonsReadRepository.GetById(request.DefenderId);
 
             if (attacker.TrainerId == defender.TrainerId)
             {
@@ -55,10 +55,11 @@ namespace Cegeka.Guild.Pokeverse.Business
                 Defender = new PokemonInFight(defender),
                 ActivePlayer = request.AttackerId
             };
-            this.battlesWriteRepository.Add(battle);
-            this.battlesWriteRepository.Save();
 
-            return Task.FromResult(Unit.Value);
+            await this.battlesWriteRepository.Add(battle);
+            await this.battlesWriteRepository.Save();
+
+            return Unit.Value;
         }
     }
 }

@@ -25,12 +25,12 @@ namespace Cegeka.Guild.Pokeverse.Business
             this.pokemonWriteRepository = pokemonWriteRepository;
         }
 
-        public Task Handle(TrainerRegisteredEvent notification, CancellationToken cancellationToken)
+        public async Task Handle(TrainerRegisteredEvent notification, CancellationToken cancellationToken)
         {
-            var trainer = this.trainersReadRepository.GetById(notification.Id);
+            var trainer = await this.trainersReadRepository.GetById(notification.Id);
 
             var random = new Random(DateTime.Now.Millisecond);
-            var pokemons = this.definitionsReadRepository.GetAll();
+            var pokemons = await this.definitionsReadRepository.GetAll();
             Enumerable.Range(1, RandomPokemonsOnRegister)
                 .Select(_ => random.Next(0, pokemons.Count()))
                 .Select(randomIndex => pokemons.ElementAt(randomIndex))
@@ -38,8 +38,7 @@ namespace Cegeka.Guild.Pokeverse.Business
                 .ToList()
                 .ForEach(p => pokemonWriteRepository.Add(p));
 
-            pokemonWriteRepository.Save();
-            return Task.CompletedTask;
+            await pokemonWriteRepository.Save();
         }
     }
 }

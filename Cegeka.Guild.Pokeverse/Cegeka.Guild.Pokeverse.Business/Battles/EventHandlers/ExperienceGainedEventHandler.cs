@@ -17,17 +17,16 @@ namespace Cegeka.Guild.Pokeverse.Business
             this.pokemonWriteRepository = pokemonWriteRepository;
         }
 
-        public Task Handle(ExperienceGainedEvent notification, CancellationToken cancellationToken)
+        public async Task Handle(ExperienceGainedEvent notification, CancellationToken cancellationToken)
         {
-            var pokemon = this.pokemonReadRepository.GetById(notification.PokemonId);
+            var pokemon = await this.pokemonReadRepository.GetById(notification.PokemonId);
             if(pokemon.Experience > pokemon.CurrentLevel * ExperienceThreshold)
             {
                 pokemon.CurrentLevel++;
                 pokemon.Experience = 0;
             }
 
-            this.pokemonWriteRepository.Save();
-            return Task.CompletedTask;
+            await this.pokemonWriteRepository.Save();
         }
     }
 }

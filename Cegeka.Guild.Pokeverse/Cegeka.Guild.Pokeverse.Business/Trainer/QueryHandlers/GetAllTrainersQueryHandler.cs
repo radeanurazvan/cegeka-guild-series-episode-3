@@ -17,9 +17,9 @@ namespace Cegeka.Guild.Pokeverse.Business
             this.trainerReadRepository = trainerReadRepository;
         }
 
-        public Task<IEnumerable<TrainerModel>> Handle(GetAllTrainersQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<TrainerModel>> Handle(GetAllTrainersQuery request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(this.trainerReadRepository.GetAll().Select(t => new TrainerModel
+            return (await this.trainerReadRepository.GetAll()).Select(t => new TrainerModel
             {
                 Id = t.Id,
                 Name = t.Name,
@@ -32,7 +32,7 @@ namespace Cegeka.Guild.Pokeverse.Business
                         Id = x.Id, Name = x.Name
                     }).ToList()
                 }).ToList()
-            }));
+            });
         }
     }
 }

@@ -1,10 +1,12 @@
-﻿namespace Cegeka.Guild.Pokeverse.Domain
+﻿using System.Threading.Tasks;
+
+namespace Cegeka.Guild.Pokeverse.Domain
 {
     public interface IWriteRepository<in T> 
         where T : Entity
     {
-        void Add(T entity);
+        Task Add(T entity);
 
-        void Save();
+        Task Save();
     }
 }

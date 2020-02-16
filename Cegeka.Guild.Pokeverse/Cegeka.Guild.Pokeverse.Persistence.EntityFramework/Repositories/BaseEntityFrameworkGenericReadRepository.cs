@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Cegeka.Guild.Pokeverse.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,14 +19,15 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
 
         protected virtual IQueryable<T> DecorateEntities(IQueryable<T> entities) => entities;
 
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAll()
         {
-            return entities.AsNoTracking().ToList();
+            var list = await entities.AsNoTracking().ToListAsync();
+            return list;
         }
 
-        public T GetById(Guid id)
+        public Task<T> GetById(Guid id)
         {
-            return entities.FirstOrDefault(x => x.Id == id);
+            return entities.FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

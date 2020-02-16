@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Cegeka.Guild.Pokeverse.Domain;
 
 namespace Cegeka.Guild.Pokeverse.Persistence.InMemory
@@ -10,13 +11,16 @@ namespace Cegeka.Guild.Pokeverse.Persistence.InMemory
     {
         private readonly ICollection<T> entities = new List<T>();
 
-        public IEnumerable<T> GetAll() => entities;
+        public Task<IEnumerable<T>> GetAll() => Task.FromResult<IEnumerable<T>>(entities);
 
-        public T GetById(Guid id) => entities.FirstOrDefault(e => e.Id == id);
+        public Task<T> GetById(Guid id) => Task.FromResult(entities.FirstOrDefault(e => e.Id == id));
 
-        public void Add(T entity) => entities.Add(entity);
-        public void Save()
+        public Task Add(T entity)
         {
+            entities.Add(entity);
+            return Task.CompletedTask;
         }
+
+        public Task Save() => Task.CompletedTask;
     }
 }

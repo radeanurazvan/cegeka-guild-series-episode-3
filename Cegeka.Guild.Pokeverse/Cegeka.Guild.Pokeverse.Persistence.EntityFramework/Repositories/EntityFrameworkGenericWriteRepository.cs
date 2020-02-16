@@ -1,4 +1,5 @@
-﻿using Cegeka.Guild.Pokeverse.Domain;
+﻿using System.Threading.Tasks;
+using Cegeka.Guild.Pokeverse.Domain;
 
 namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
 {
@@ -12,14 +13,14 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
             this.context = context;
         }
 
-        public void Add(T entity)
+        public async Task Add(T entity)
         {
-            context.Set<T>().Add(entity);
+            await context.Set<T>().AddAsync(entity);
         }
 
-        public void Save()
+        public Task Save()
         {
-            context.SaveChanges();
+            return context.SaveChangesAsync();
         }
     }
 }

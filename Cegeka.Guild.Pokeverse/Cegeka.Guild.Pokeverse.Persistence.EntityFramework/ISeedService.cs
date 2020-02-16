@@ -1,7 +1,9 @@
-﻿namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
+﻿using System.Threading.Tasks;
+
+namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
 {
     public interface ISeedService
     {
-        void Seed();
+        Task Seed();
     }
 }

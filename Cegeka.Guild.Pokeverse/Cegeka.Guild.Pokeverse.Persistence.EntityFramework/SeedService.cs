@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Cegeka.Guild.Pokeverse.Domain;
 
 namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
@@ -94,16 +95,18 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
             this.definitionsWriteRepository = definitionsWriteRepository;
         }
 
-        public void Seed()
+        public async Task Seed()
         {
-            var existingDefinitions = definitionsReadRepository.GetAll();
+            var existingDefinitions = await definitionsReadRepository.GetAll();
             if (existingDefinitions.Any())
             {
                 return;
             }
 
-            defaultPokemonDefinitions.ToList().ForEach(definitionsWriteRepository.Add);
-            definitionsWriteRepository.Save();
+            var tasks = defaultPokemonDefinitions.Select(definitionsWriteRepository.Add);
+            await Task.WhenAll(tasks);
+
+            await definitionsWriteRepository.Save();
         }
     }
 }
