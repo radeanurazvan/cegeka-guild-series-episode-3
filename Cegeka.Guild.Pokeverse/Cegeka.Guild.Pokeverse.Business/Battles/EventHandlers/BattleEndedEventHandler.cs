@@ -32,10 +32,11 @@ namespace Cegeka.Guild.Pokeverse.Business
             var winner = battle.Winner;
 
 
-            winner.Experience += (int)Math.Round(experienceGained * WinnerBonusFactor)+ experienceGained;
+            //winner.Experience += (int)Math.Round(experienceGained * WinnerBonusFactor)+ experienceGained;
 
             var loser = battle.Loser;
-            loser.Experience += experienceGained;
+            //loser.Experience += experienceGained;
+            // TODO
             await this.battlesWriteRepository.Save();
 
             await this.mediator.Publish(new ExperienceGainedEvent(winner.Id), cancellationToken);

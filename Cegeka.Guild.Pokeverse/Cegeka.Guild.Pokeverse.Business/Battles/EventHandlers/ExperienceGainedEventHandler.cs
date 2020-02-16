@@ -22,8 +22,9 @@ namespace Cegeka.Guild.Pokeverse.Business
             var pokemon = (await this.pokemonReadRepository.GetById(notification.PokemonId)).Value;
             if(pokemon.Experience > pokemon.CurrentLevel * ExperienceThreshold)
             {
-                pokemon.CurrentLevel++;
-                pokemon.Experience = 0;
+                //pokemon.CurrentLevel++;
+                //pokemon.Experience = 0;
+                // TODO
             }
 
             await this.pokemonWriteRepository.Save();
