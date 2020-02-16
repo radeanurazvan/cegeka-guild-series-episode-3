@@ -79,6 +79,15 @@ namespace Cegeka.Guild.Pokeverse.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Battle is still ongoing!.
+        /// </summary>
+        public static string BattleIsOngoing {
+            get {
+                return ResourceManager.GetString("BattleIsOngoing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A pokemon cannot fight itself!.
         /// </summary>
         public static string CannotFightItself {

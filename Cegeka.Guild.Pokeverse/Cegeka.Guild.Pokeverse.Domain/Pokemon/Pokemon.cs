@@ -79,6 +79,12 @@ namespace Cegeka.Guild.Pokeverse.Domain
                 .Bind(() => battleResult.Value.TakeTurn(this.Id, abilityResult.Value));
         }
 
+        internal void CollectExperience(int points)
+        {
+            this.Experience += points;
+            this.AddDomainEvent(new ExperienceGainedEvent(this));
+        }
+
         private bool IsInBattle => this.battles.Any(b => b.Battle.IsOnGoing);
 
         public static class Expressions

@@ -6,7 +6,7 @@ using CSharpFunctionalExtensions;
 
 namespace Cegeka.Guild.Pokeverse.Domain
 {
-    public class Battle : AggregateRoot
+    public sealed class Battle : AggregateRoot
     {
         private Battle()
         {
@@ -56,6 +56,13 @@ namespace Cegeka.Guild.Pokeverse.Domain
                 .Tap(victim => victim.TakeDamage(ability.Damage))
                 .Tap(victim => ActivePlayer = victim.PokemonId)
                 .Tap(TryConcludeBattle);
+        }
+
+        public Result AwardParticipants()
+        {
+            return Result.FailureIf(IsOnGoing, Messages.BattleIsOngoing)
+                .Tap(() => this.Loser.CollectExperience(BattleExperience.ForLoser()))
+                .Tap(() => this.Winner.CollectExperience(BattleExperience.ForWinner()));
         }
 
         private void TryConcludeBattle(PokemonInFight victim)

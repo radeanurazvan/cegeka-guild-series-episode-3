@@ -123,6 +123,9 @@
   <data name="BattleHasEnded" xml:space="preserve">
     <value>Battle has already ended!</value>
   </data>
+  <data name="BattleIsOngoing" xml:space="preserve">
+    <value>Battle is still ongoing!</value>
+  </data>
   <data name="CannotFightItself" xml:space="preserve">
     <value>A pokemon cannot fight itself!</value>
   </data>
