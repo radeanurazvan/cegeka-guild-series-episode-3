@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CSharpFunctionalExtensions;
 
 namespace Cegeka.Guild.Pokeverse.Domain
 {
@@ -9,6 +10,6 @@ namespace Cegeka.Guild.Pokeverse.Domain
     {
         Task<IEnumerable<T>> GetAll();
 
-        Task<T> GetById(Guid id);
+        Task<Maybe<T>> GetById(Guid id);
     }
 }
