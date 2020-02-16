@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cegeka.Guild.Pokeverse.Common;
 
 namespace Cegeka.Guild.Pokeverse.Domain
 {
