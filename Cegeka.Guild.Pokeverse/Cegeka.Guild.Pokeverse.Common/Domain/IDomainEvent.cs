@@ -1,6 +1,8 @@
-﻿namespace Cegeka.Guild.Pokeverse.Common
+﻿using MediatR;
+
+namespace Cegeka.Guild.Pokeverse.Common
 {
-    public interface IDomainEvent
+    public interface IDomainEvent : INotification
     {
         
     }

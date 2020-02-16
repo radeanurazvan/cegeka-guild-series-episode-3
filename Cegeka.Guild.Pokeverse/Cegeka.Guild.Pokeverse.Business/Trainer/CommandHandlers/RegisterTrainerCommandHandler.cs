@@ -1,29 +1,26 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Cegeka.Guild.Pokeverse.Domain;
+using CSharpFunctionalExtensions;
 using MediatR;
 
 namespace Cegeka.Guild.Pokeverse.Business
 {
-    internal sealed class RegisterTrainerCommandHandler : IRequestHandler<RegisterTrainerCommand>
+    internal sealed class RegisterTrainerCommandHandler : IRequestHandler<RegisterTrainerCommand, Result>
     {
-        private readonly IWriteRepository<Trainer> trainerReadRepository;
-        private readonly IMediator mediator;
+        private readonly IRepositoryMediator mediator;
 
-        public RegisterTrainerCommandHandler(IWriteRepository<Trainer> trainerReadRepository, IMediator mediator)
+        public RegisterTrainerCommandHandler(IRepositoryMediator mediator)
         {
-            this.trainerReadRepository = trainerReadRepository;
             this.mediator = mediator;
         }
 
-        public Task<Unit> Handle(RegisterTrainerCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(RegisterTrainerCommand request, CancellationToken cancellationToken)
         {
-            var trainer = new Trainer { Name = request.Name };
-
-            this.trainerReadRepository.Add(trainer);
-            this.trainerReadRepository.Save();
-            this.mediator.Publish(new TrainerRegisteredEvent(trainer.Id), cancellationToken);
-            return Task.FromResult(Unit.Value);
+            var writeRepository = this.mediator.Write<Trainer>();
+            return await Trainer.Create(request.Name)
+                .Tap(t => writeRepository.Add(t))
+                .Tap(() => writeRepository.Save());
         }
     }
 }
