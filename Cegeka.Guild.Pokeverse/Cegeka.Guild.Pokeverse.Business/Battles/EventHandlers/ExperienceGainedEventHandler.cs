@@ -1,33 +1,26 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Cegeka.Guild.Pokeverse.Common.Resources;
 using Cegeka.Guild.Pokeverse.Domain;
+using CSharpFunctionalExtensions;
 using MediatR;
 
 namespace Cegeka.Guild.Pokeverse.Business
 {
     internal sealed class ExperienceGainedEventHandler : INotificationHandler<ExperienceGainedEvent>
     {
-        private const int ExperienceThreshold = 100;
-        private readonly IReadRepository<Pokemon> pokemonReadRepository;
-        private readonly IWriteRepository<Pokemon> pokemonWriteRepository;
+        private readonly IRepositoryMediator mediator;
 
-        public ExperienceGainedEventHandler(IReadRepository<Pokemon> pokemonReadRepository, IWriteRepository<Pokemon> pokemonWriteRepository)
+        public ExperienceGainedEventHandler(IRepositoryMediator mediator)
         {
-            this.pokemonReadRepository = pokemonReadRepository;
-            this.pokemonWriteRepository = pokemonWriteRepository;
+            this.mediator = mediator;
         }
 
-        public async Task Handle(ExperienceGainedEvent notification, CancellationToken cancellationToken)
+        public Task Handle(ExperienceGainedEvent notification, CancellationToken cancellationToken)
         {
-            var pokemon = (await this.pokemonReadRepository.GetById(notification.PokemonId)).Value;
-            if(pokemon.Experience > pokemon.CurrentLevel * ExperienceThreshold)
-            {
-                //pokemon.CurrentLevel++;
-                //pokemon.Experience = 0;
-                // TODO
-            }
-
-            await this.pokemonWriteRepository.Save();
+            return this.mediator.Read<Pokemon>().GetById(notification.PokemonId).ToResult(Messages.PokemonDoesNotExist)
+                .Bind(p => p.LevelUp())
+                .Tap(() => this.mediator.Write<Pokemon>().Save());
         }
     }
 }

@@ -7,9 +7,10 @@ namespace Cegeka.Guild.Pokeverse.Domain
         private PokemonInFight() {}
 
         public PokemonInFight(Pokemon pokemon)
+            : this()
         {
             Pokemon = pokemon;
-            Health = pokemon.HealthPoints * 15;
+            Health = pokemon.Stats.HealthPoints * 15;
         }
 
         public Pokemon Pokemon { get; private set; }
