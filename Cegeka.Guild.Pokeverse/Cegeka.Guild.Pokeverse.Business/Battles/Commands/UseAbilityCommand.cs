@@ -1,9 +1,10 @@
 ﻿using System;
+using CSharpFunctionalExtensions;
 using MediatR;
 
 namespace Cegeka.Guild.Pokeverse.Business
 {
-    public class UseAbilityCommand : IRequest
+    public class UseAbilityCommand : IRequest<Result>
     {
         public UseAbilityCommand(Guid battleId, Guid participantId, Guid abilityId)
         {

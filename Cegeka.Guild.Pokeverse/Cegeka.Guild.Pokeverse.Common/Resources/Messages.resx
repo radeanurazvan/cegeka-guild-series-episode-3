@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BattleDoesNotExist" xml:space="preserve">
+    <value>The battle does not exist!</value>
+  </data>
+  <data name="BattleHasEnded" xml:space="preserve">
+    <value>Battle has already ended!</value>
+  </data>
   <data name="CannotFightItself" xml:space="preserve">
     <value>A pokemon cannot fight itself!</value>
+  </data>
+  <data name="CannotUseAbility" xml:space="preserve">
+    <value>You cannot use this ability yet!</value>
   </data>
   <data name="InvalidPokemon" xml:space="preserve">
     <value>Pokemon is invalid!</value>
@@ -132,6 +141,9 @@
   <data name="InvalidTrainerName" xml:space="preserve">
     <value>The trainer name is invalid!</value>
   </data>
+  <data name="NotYourTurn" xml:space="preserve">
+    <value>You are not the active player, wait for your turn!</value>
+  </data>
   <data name="PokemonAlreadyInBattle" xml:space="preserve">
     <value>Pokemon is already in battle!</value>
   </data>
@@ -140,5 +152,8 @@
   </data>
   <data name="SiblingsCannotFight" xml:space="preserve">
     <value>Two pokemons of the same trainer cannot fight!</value>
+  </data>
+  <data name="UnknownAbility" xml:space="preserve">
+    <value>Unknown ability!</value>
   </data>
 </root>

@@ -53,7 +53,7 @@ namespace Cegeka.Guild.Pokeverse.Domain
 
         public string Name => this.Definition.Name;
 
-        public IEnumerable<Ability> Abilities => this.Definition.Abilities;
+        public IEnumerable<Ability> Abilities => this.Definition.Abilities.Where(a => a.RequiredLevel <= CurrentLevel);
 
         public IEnumerable<PokemonBattle> Battles => this.battles;
 
@@ -65,6 +65,18 @@ namespace Cegeka.Guild.Pokeverse.Domain
                 .Ensure(() => !this.IsInBattle, Messages.PokemonAlreadyInBattle)
                 .Ensure(() => !other.IsInBattle, Messages.PokemonAlreadyInBattle)
                 .Map(() => Battle.Create(this, other));
+        }
+
+        public Result UseAbility(Guid battleId, Guid abilityId)
+        {
+            var abilityResult = this.Definition.Abilities.FirstOrNothing(a => a.Id == abilityId).ToResult(Messages.UnknownAbility)
+                .Ensure(a => a.RequiredLevel <= CurrentLevel, Messages.CannotUseAbility);
+            var battleResult = this.battles.FirstOrNothing(b => b.BattleId == battleId).Select(b => b.Battle).ToResult(Messages.BattleDoesNotExist)
+                .Ensure(b => b.IsOnGoing, Messages.BattleHasEnded)
+                .Ensure(b => b.ActivePlayer == this.Id, Messages.NotYourTurn);
+
+            return Result.FirstFailureOrSuccess(abilityResult, battleResult)
+                .Bind(() => battleResult.Value.TakeTurn(this.Id, abilityResult.Value));
         }
 
         private bool IsInBattle => this.battles.Any(b => b.Battle.IsOnGoing);

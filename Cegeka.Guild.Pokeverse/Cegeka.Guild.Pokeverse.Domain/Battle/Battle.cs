@@ -1,5 +1,8 @@
 ﻿using System;
+using Cegeka.Guild.Pokeverse.Business;
 using Cegeka.Guild.Pokeverse.Common;
+using Cegeka.Guild.Pokeverse.Common.Resources;
+using CSharpFunctionalExtensions;
 
 namespace Cegeka.Guild.Pokeverse.Domain
 {
@@ -45,5 +48,27 @@ namespace Cegeka.Guild.Pokeverse.Domain
         public Guid? LoserId { get; private set; }
 
         public bool IsOnGoing => Winner == null;
+
+        internal Result TakeTurn(Guid player, Ability ability)
+        {
+            return Result.SuccessIf(IsOnGoing, Messages.BattleHasEnded)
+                .Map(() => AttackerId == player ? Defender : Attacker)
+                .Tap(victim => victim.TakeDamage(ability.Damage))
+                .Tap(victim => ActivePlayer = victim.PokemonId)
+                .Tap(TryConcludeBattle);
+        }
+
+        private void TryConcludeBattle(PokemonInFight victim)
+        {
+            if (victim.Health > 0)
+            {
+                return;
+            }
+
+            this.Loser = victim.Pokemon;
+            this.Winner = victim.PokemonId == AttackerId ? Defender.Pokemon : Attacker.Pokemon;
+            this.FinishedAt = DateTime.Now;
+            this.AddDomainEvent(new BattleEndedEvent(this));
+        }
     }
 }

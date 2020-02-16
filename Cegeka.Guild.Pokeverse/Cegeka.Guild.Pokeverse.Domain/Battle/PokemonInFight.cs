@@ -17,5 +17,10 @@ namespace Cegeka.Guild.Pokeverse.Domain
         public Guid PokemonId { get; private set; }
 
         public int Health { get; private set; }
+
+        internal void TakeDamage(int damage)
+        {
+            Health -= damage;
+        }
     }
 }

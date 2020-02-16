@@ -61,11 +61,38 @@ namespace Cegeka.Guild.Pokeverse.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The battle does not exist!.
+        /// </summary>
+        public static string BattleDoesNotExist {
+            get {
+                return ResourceManager.GetString("BattleDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Battle has already ended!.
+        /// </summary>
+        public static string BattleHasEnded {
+            get {
+                return ResourceManager.GetString("BattleHasEnded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A pokemon cannot fight itself!.
         /// </summary>
         public static string CannotFightItself {
             get {
                 return ResourceManager.GetString("CannotFightItself", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot use this ability yet!.
+        /// </summary>
+        public static string CannotUseAbility {
+            get {
+                return ResourceManager.GetString("CannotUseAbility", resourceCulture);
             }
         }
         
@@ -106,6 +133,15 @@ namespace Cegeka.Guild.Pokeverse.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You are not the active player, wait for your turn!.
+        /// </summary>
+        public static string NotYourTurn {
+            get {
+                return ResourceManager.GetString("NotYourTurn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pokemon is already in battle!.
         /// </summary>
         public static string PokemonAlreadyInBattle {
@@ -129,6 +165,15 @@ namespace Cegeka.Guild.Pokeverse.Common.Resources {
         public static string SiblingsCannotFight {
             get {
                 return ResourceManager.GetString("SiblingsCannotFight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown ability!.
+        /// </summary>
+        public static string UnknownAbility {
+            get {
+                return ResourceManager.GetString("UnknownAbility", resourceCulture);
             }
         }
     }

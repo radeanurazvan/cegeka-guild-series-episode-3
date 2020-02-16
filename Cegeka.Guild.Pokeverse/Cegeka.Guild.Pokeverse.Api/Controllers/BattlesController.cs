@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using Cegeka.Guild.Pokeverse.Api.Extensions;
 using Cegeka.Guild.Pokeverse.Business;
@@ -21,27 +22,14 @@ namespace Cegeka.Guild.Pokeverse.Api
         public async Task<IActionResult> StartBattle([FromBody] StartBattleModel model)
         {
             var result = await mediator.Send(new StartBattleCommand(model.AttackerId, model.DefenderId));
-            return result.ToActionResult(NoContent);
+            return result.ToActionResult(() => StatusCode((int)HttpStatusCode.Created));
         }
 
         [HttpPatch("{id:Guid}")]
         public async Task<IActionResult> UseAbility([FromRoute] Guid id, [FromBody] UseAbilityModel model)
         {
-            return await RunWithException(() => this.mediator.Send(new UseAbilityCommand(id, model.ParticipantId, model.AbilityId)), NoContent);
-        }
-
-        private async Task<IActionResult> RunWithException(Func<Task> act, Func<IActionResult> onOk)
-        {
-            try
-            {
-                await act();
-
-                return onOk();
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            var result = await this.mediator.Send(new UseAbilityCommand(id, model.ParticipantId, model.AbilityId));
+            return result.ToActionResult(NoContent);
         }
     }
 }
