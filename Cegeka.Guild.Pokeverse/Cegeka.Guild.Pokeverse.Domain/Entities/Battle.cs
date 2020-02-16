@@ -3,7 +3,7 @@ using Cegeka.Guild.Pokeverse.Common;
 
 namespace Cegeka.Guild.Pokeverse.Domain
 {
-    public class Battle : Entity
+    public class Battle : AggregateRoot
     {
         public Battle()
         {

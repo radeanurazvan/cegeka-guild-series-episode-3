@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Cegeka.Guild.Pokeverse.Common;
 using Cegeka.Guild.Pokeverse.Domain;

@@ -7,7 +7,7 @@ using CSharpFunctionalExtensions;
 namespace Cegeka.Guild.Pokeverse.Domain
 {
     public interface IReadRepository<T>
-        where T : Entity
+        where T : AggregateRoot
     {
         Task<IEnumerable<T>> GetAll();
 

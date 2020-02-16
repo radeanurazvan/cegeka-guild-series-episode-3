@@ -4,7 +4,7 @@ using Cegeka.Guild.Pokeverse.Common;
 
 namespace Cegeka.Guild.Pokeverse.Domain
 {
-    public class Pokemon : Entity
+    public class Pokemon : AggregateRoot
     {
         private Pokemon()
         {

@@ -14,8 +14,8 @@ namespace Cegeka.Guild.Pokeverse.Infrastructure
             this.provider = provider;
         }
 
-        public IReadRepository<T> Read<T>() where T : Entity => provider.GetService<IReadRepository<T>>();
+        public IReadRepository<T> Read<T>() where T : AggregateRoot => provider.GetService<IReadRepository<T>>();
 
-        public IWriteRepository<T> Write<T>() where T : Entity => provider.GetService<IWriteRepository<T>>();
+        public IWriteRepository<T> Write<T>() where T : AggregateRoot => provider.GetService<IWriteRepository<T>>();
     }
 }

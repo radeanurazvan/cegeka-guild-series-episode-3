@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
 {
     internal abstract class BaseEntityFrameworkGenericReadRepository<T> : IReadRepository<T>
-        where T : Entity
+        where T : AggregateRoot
     {
         private readonly IQueryable<T> entities;
 

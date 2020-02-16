@@ -3,7 +3,7 @@ using Cegeka.Guild.Pokeverse.Common;
 
 namespace Cegeka.Guild.Pokeverse.Domain
 {
-    public class Trainer : Entity
+    public class Trainer : AggregateRoot
     {
         public string Name { get; set; }
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Cegeka.Guild.Pokeverse.Common;
 using Cegeka.Guild.Pokeverse.Domain;
@@ -9,7 +8,7 @@ using CSharpFunctionalExtensions;
 namespace Cegeka.Guild.Pokeverse.Persistence.InMemory
 {
     internal class GenericReadRepository<T> : IReadRepository<T>, IWriteRepository<T>
-        where T : Entity
+        where T : AggregateRoot
     {
         private readonly ICollection<T> entities = new List<T>();
 
