@@ -25,6 +25,7 @@ namespace Cegeka.Guild.Pokeverse.Persistence.EntityFramework
                 .HasForeignKey<Battle>(x => x.WinnerId)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            builder.Ignore(b => b.IsOnGoing);
             builder.HasOne(x => x.Loser)
                 .WithOne()
                 .HasForeignKey<Battle>(x => x.LoserId)

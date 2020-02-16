@@ -63,16 +63,16 @@ namespace Cegeka.Guild.Pokeverse.Business
                 pokemonTakingDamage = battle.Defender;
             }
 
-            pokemonTakingDamage.Health -= ability.Damage;
-            battle.ActivePlayer = pokemonTakingDamage.Pokemon.Id;
-            if (pokemonTakingDamage.Health <= 0)
-            {
-                battle.Winner = pokemonDealingDamage;
-                battle.Loser = pokemonTakingDamage.Pokemon;
-                battle.FinishedAt = DateTime.Now;
+            //pokemonTakingDamage.Health -= ability.Damage;
+            //battle.ActivePlayer = pokemonTakingDamage.Pokemon.Id;
+            //if (pokemonTakingDamage.Health <= 0)
+            //{
+            //    battle.Winner = pokemonDealingDamage;
+            //    battle.Loser = pokemonTakingDamage.Pokemon;
+            //    battle.FinishedAt = DateTime.Now;
 
-                await mediator.Publish(new BattleEndedEvent(battle.Id), cancellationToken);
-            }
+            //    await mediator.Publish(new BattleEndedEvent(battle.Id), cancellationToken);
+            //}
 
             await battlesWriteRepository.Save();
 

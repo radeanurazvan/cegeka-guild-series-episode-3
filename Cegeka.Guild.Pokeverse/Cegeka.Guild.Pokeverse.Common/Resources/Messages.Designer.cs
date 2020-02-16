@@ -61,6 +61,24 @@ namespace Cegeka.Guild.Pokeverse.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A pokemon cannot fight itself!.
+        /// </summary>
+        public static string CannotFightItself {
+            get {
+                return ResourceManager.GetString("CannotFightItself", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pokemon is invalid!.
+        /// </summary>
+        public static string InvalidPokemon {
+            get {
+                return ResourceManager.GetString("InvalidPokemon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The pokemon definition is invalid!.
         /// </summary>
         public static string InvalidPokemonDefinition {
@@ -84,6 +102,33 @@ namespace Cegeka.Guild.Pokeverse.Common.Resources {
         public static string InvalidTrainerName {
             get {
                 return ResourceManager.GetString("InvalidTrainerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pokemon is already in battle!.
+        /// </summary>
+        public static string PokemonAlreadyInBattle {
+            get {
+                return ResourceManager.GetString("PokemonAlreadyInBattle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The given pokemon does not exist!.
+        /// </summary>
+        public static string PokemonDoesNotExist {
+            get {
+                return ResourceManager.GetString("PokemonDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Two pokemons of the same trainer cannot fight!.
+        /// </summary>
+        public static string SiblingsCannotFight {
+            get {
+                return ResourceManager.GetString("SiblingsCannotFight", resourceCulture);
             }
         }
     }

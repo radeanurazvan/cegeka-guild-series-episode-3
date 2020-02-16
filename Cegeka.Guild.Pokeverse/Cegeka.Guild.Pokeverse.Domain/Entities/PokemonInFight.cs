@@ -12,10 +12,10 @@ namespace Cegeka.Guild.Pokeverse.Domain
             Health = pokemon.HealthPoints * 15;
         }
 
-        public Pokemon Pokemon { get; set; }
+        public Pokemon Pokemon { get; private set; }
 
-        public Guid PokemonId { get; set; }
+        public Guid PokemonId { get; private set; }
 
-        public int Health { get; set; }
+        public int Health { get; private set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Cegeka.Guild.Pokeverse.Common;
 using Cegeka.Guild.Pokeverse.Common.Resources;
 using CSharpFunctionalExtensions;
@@ -8,6 +9,8 @@ namespace Cegeka.Guild.Pokeverse.Domain
 {
     public class Pokemon : AggregateRoot
     {
+        private readonly ICollection<PokemonBattle> battles = new List<PokemonBattle>();
+
         private Pokemon()
         {
             HealthPoints = 1;
@@ -17,7 +20,7 @@ namespace Cegeka.Guild.Pokeverse.Domain
             Experience = 0;
         }
 
-        private Pokemon(Trainer trainer, PokemonDefinition definition)
+        private Pokemon(Trainer trainer, PokemonDefinition definition) : this()
         {
             DefinitionId = definition.Id;
             TrainerId = trainer.Id;
@@ -50,6 +53,25 @@ namespace Cegeka.Guild.Pokeverse.Domain
 
         public string Name => this.Definition.Name;
 
-        public ICollection<Ability> Abilities => this.Definition.Abilities;
+        public IEnumerable<Ability> Abilities => this.Definition.Abilities;
+
+        public IEnumerable<PokemonBattle> Battles => this.battles;
+
+        public Result<Battle> Attack(Pokemon other)
+        {
+            return Result.FailureIf(other == null, Messages.InvalidPokemon)
+                .Ensure(() => this != other, Messages.CannotFightItself)
+                .Ensure(() => this.TrainerId != other.TrainerId, Messages.SiblingsCannotFight)
+                .Ensure(() => !this.IsInBattle, Messages.PokemonAlreadyInBattle)
+                .Ensure(() => !other.IsInBattle, Messages.PokemonAlreadyInBattle)
+                .Map(() => Battle.Create(this, other));
+        }
+
+        private bool IsInBattle => this.battles.Any(b => b.Battle.IsOnGoing);
+
+        public static class Expressions
+        {
+            public static string Battles = $"{nameof(battles)}.{nameof(PokemonBattle.Battle)}";
+        }
     }
 }

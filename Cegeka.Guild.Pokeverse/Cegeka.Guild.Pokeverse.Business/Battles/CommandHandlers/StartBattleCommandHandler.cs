@@ -1,65 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using Cegeka.Guild.Pokeverse.Common.Resources;
 using Cegeka.Guild.Pokeverse.Domain;
+using CSharpFunctionalExtensions;
 using MediatR;
 
 namespace Cegeka.Guild.Pokeverse.Business
 {
-    internal sealed class StartBattleCommandHandler : IRequestHandler<StartBattleCommand>
+    internal sealed class StartBattleCommandHandler : IRequestHandler<StartBattleCommand, Result>
     {
-        private readonly IReadRepository<Battle> battlesReadRepository;
-        private readonly IReadRepository<Pokemon> pokemonsReadRepository;
-        private readonly IWriteRepository<Battle> battlesWriteRepository;
+        private readonly IRepositoryMediator mediator;
 
-        public StartBattleCommandHandler(
-            IReadRepository<Battle>  battlesReadRepository, 
-            IReadRepository<Pokemon> pokemonsReadRepository,
-            IWriteRepository<Battle> battlesWriteRepository)
+        public StartBattleCommandHandler(IRepositoryMediator mediator)
         {
-            this.battlesReadRepository = battlesReadRepository;
-            this.pokemonsReadRepository = pokemonsReadRepository;
-            this.battlesWriteRepository = battlesWriteRepository;
+            this.mediator = mediator;
         }
 
-        public async Task<Unit> Handle(StartBattleCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(StartBattleCommand request, CancellationToken cancellationToken)
         {
-            if (request.AttackerId== request.DefenderId)
-            {
-                throw new InvalidOperationException("A pokemon cannot fight itself!");
-            }
+            var pokemons = this.mediator.Read<Pokemon>();
+            var attackerResult = await pokemons.GetById(request.AttackerId).ToResult(Messages.PokemonDoesNotExist);
+            var defenderResult = await pokemons.GetById(request.DefenderId).ToResult(Messages.PokemonDoesNotExist);
 
-            var participants = new List<Guid> {request.AttackerId, request.DefenderId};
-            var pokemonsAlreadyInBattle = (await this.battlesReadRepository.GetAll())
-                .Any(b => participants.Contains(b.AttackerId) || participants.Contains(b.DefenderId));
-            if (pokemonsAlreadyInBattle)
-            {
-                throw new InvalidOperationException("Pokemons already in battle!");
-            }
-
-            var attacker = (await this.pokemonsReadRepository.GetById(request.AttackerId)).Value;
-            var defender = (await this.pokemonsReadRepository.GetById(request.DefenderId)).Value;
-
-            if (attacker.TrainerId == defender.TrainerId)
-            {
-                throw new InvalidOperationException("Two pokemons of the same trainer cannot fight!");
-            }
-
-            var battle = new Battle
-            {
-                AttackerId = request.AttackerId,
-                Attacker = new PokemonInFight(attacker),
-                DefenderId = request.DefenderId,
-                Defender = new PokemonInFight(defender),
-                ActivePlayer = request.AttackerId
-            };
-
-            await this.battlesWriteRepository.Add(battle);
-            await this.battlesWriteRepository.Save();
-
-            return Unit.Value;
+            var writeRepository = this.mediator.Write<Battle>();
+            return await Result.FirstFailureOrSuccess(attackerResult, defenderResult)
+                .Bind(() => attackerResult.Value.Attack(defenderResult.Value))
+                .Tap(b => writeRepository.Add(b))
+                .Tap(() => writeRepository.Save());
         }
     }
 }
